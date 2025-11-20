@@ -134,4 +134,4 @@ The system is divided into **three main layers**:
 ### ⚡ Steps
 1. Clone the repository  
    ```bash
-   git clone https://github.com/yourusername/pharmacy-management-system.git
+   git clone https://github.com/3seem/pharmacy-management.git
