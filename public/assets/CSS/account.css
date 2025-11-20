@@ -1,0 +1,481 @@
+ /* Basic reset and styling */
+ body {
+     margin: 0;
+     font-family: 'Helvetica Neue', Arial, sans-serif;
+     background-color: #f4f4f4;
+     color: #333;
+ }
+
+ a {
+     text-decoration: none;
+     color: inherit;
+ }
+
+ a:hover {
+     color: #007bff;
+ }
+
+ .container {
+     width: 100%;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 0 1rem;
+ }
+
+ header {
+     background-color: #fff;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+     margin-bottom: 1rem;
+ }
+
+ .nav-container {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 1rem 0;
+ }
+
+ .logo {
+     color: #0061ff;
+     font-size: 30px;
+     font-weight: bolder;
+ }
+
+ .search-form {
+     flex: 1;
+     display: flex;
+     margin: 0 1rem;
+ }
+
+ .search-form input[type="search"] {
+     flex: 1;
+     padding: 0.5rem 1rem;
+     border: 2px solid #ddd;
+     border-radius: 0.5rem 0 0 0.5rem;
+ }
+
+ .search-form button {
+     padding: 0 1rem;
+     border: none;
+     background-color: #007bff;
+     color: #fff;
+     border-radius: 0 0.5rem 0.5rem 0;
+     cursor: pointer;
+ }
+
+ .search-form button:hover {
+     background-color: #007bff;
+ }
+
+ .main-nav ul {
+     display: flex;
+     list-style: none;
+ }
+
+ .main-nav li {
+     margin-left: 1.5rem;
+ }
+
+ .main-nav a {
+     font-weight: 500;
+     color: #444;
+ }
+
+ .main-nav a:hover {
+     color: #007bff;
+ }
+
+ .user-container {
+     max-width: 850px;
+     margin: 2rem auto;
+     background-color: #fff;
+     padding: 1rem;
+     border-radius: 8px;
+     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+ }
+
+ /* Tab navigation */
+ .tabs {
+     display: flex;
+     border-bottom: 2px solid #e0e0e0;
+     margin-bottom: 1rem;
+ }
+
+ .tab {
+     padding: 0.75rem 1.5rem;
+     cursor: pointer;
+     font-weight: bold;
+     color: #555;
+     border-bottom: 2px solid transparent;
+ }
+
+ .tab.active {
+     border-color: #007BFF;
+     color: #007BFF;
+ }
+
+ /* Hide all tab content by default */
+ .tab-content {
+     display: none;
+ }
+
+ .tab-content.active {
+    display: block;
+    padding: 30px;
+}
+
+ .tab-content.active h2 {
+     color: #007BFF;
+ }
+
+ /* Layout for forms and info */
+ .form-group {
+     margin-bottom: 1rem;
+     display: flex;
+     flex-wrap: wrap;
+ }
+
+ .form-group label {
+     width: 150px;
+     font-weight: bold;
+     margin-right: 1rem;
+ }
+
+ .form-group input {
+     flex: 1;
+     padding: 0.5rem;
+     border: 2px solid #0c1d5a;
+     border-radius: 4px;
+ }
+
+ /* Loyalty and orders in overview */
+ .loyalty {
+     margin: 1rem 0;
+ }
+
+ .loyalty p {
+     margin: 0.5rem 0;
+ }
+
+ .update-btn {
+     padding: 0.5rem 1rem;
+     background-color: #007BFF;
+     color: #fff;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+ }
+
+ .update-btn:hover {
+     background-color: #d6e8ff;
+     color: #0c1d5a;
+ }
+
+.recent-orders {
+    padding: 30px 0;
+    margin-top: 1rem;
+}
+
+ .recent-orders h2 {
+     color: #007BFF;
+ }
+
+ .order-item {
+     border-top: 1px solid #e0e0e0;
+     padding: 0.5rem 0;
+     display: flex;
+     justify-content: space-between;
+     margin: 5px;
+ }
+
+ .order-item:first-child {
+     border-top: none;
+ }
+
+ .date {
+     margin: 15px 0;
+ }
+
+ .status {
+     margin: 10px 0;
+     background-color: #d6e8ff;
+     border-radius: 20px;
+     padding: 5px;
+ }
+
+ /* Orders page */
+ .order-history h3 {
+     margin-bottom: 1rem;
+ }
+
+ .order-list {
+     width: 100%;
+ }
+
+ /* history card */
+ .order-card {
+     background-color: #fff;
+     border-radius: 10px;
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+     padding: 20px;
+ }
+
+ .order-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 15px;
+ }
+
+ .order-header .status {
+     padding: 5px 12px;
+     border-radius: 20px;
+     font-size: 12px;
+     font-weight: bold;
+     text-transform: uppercase;
+ }
+
+ .order-header .delivered {
+     background-color: #d6e8ff;
+     color: #0c1d5a;
+ }
+
+ .order-body {
+     display: flex;
+     justify-content: space-between;
+     margin-bottom: 15px;
+     font-size: 14px;
+     color: #555;
+ }
+
+ .order-body strong {
+     display: block;
+     margin-top: 5px;
+     color: #000;
+ }
+
+ .view-details {
+     width: 100%;
+     padding: 10px;
+     background-color: #fff;
+     border: 1px solid #ccc;
+     border-radius: 8px;
+     cursor: pointer;
+     font-weight: bold;
+     transition: background 0.2s;
+ }
+
+ .view-details:hover {
+     background-color: #f0f0f0;
+ }
+
+ .history {
+     display: flex;
+     flex-direction: column;
+     margin: 0 10px;
+     border-bottom: 1px solid rgba(128, 128, 128, 0.526);
+ }
+
+ .main-details {
+     display: flex;
+     justify-content: space-between;
+     height: 40px;
+ }
+
+ .order-details {
+     display: none;
+     padding: 10px 0;
+ }
+
+ .order-details.active {
+     display: block;
+ }
+
+ /* Settings page */
+ .settings-section {
+     margin-bottom: 1.5rem;
+     padding: 30px;
+ }
+
+ .settings-section h3 {
+     margin-bottom: 0.5rem;
+ }
+
+ .settings-section form .form-group {
+     align-items: center;
+ }
+
+ .settings-section form button {
+     margin-top: 1rem;
+     padding: 0.5rem 1rem;
+     background-color: #007BFF;
+     color: #fff;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+ }
+
+ .settings-section form button:hover {
+     background-color: #0056b3;
+ }
+
+.pay-container {
+     width: 100%;
+     max-width: 760px;
+     background: #fff;
+     padding: 30px;
+     border-radius: 16px;
+ }
+
+ /* Header */
+ .header {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     padding-bottom: 15px;
+     border-bottom: 1px solid #e6e6e6;
+     margin-bottom: 25px;
+ }
+
+.header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #0061ff;
+}
+
+ /* Card */
+ .card {
+     display: flex;
+     justify-content: space-between;
+     padding: 18px;
+     border: 1px solid #dcdcdc;
+     border-radius: 14px;
+     background: #fff;
+     margin-bottom: 18px;
+     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.05);
+     transition: 0.25s;
+ }
+
+ .card:hover {
+     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+ }
+
+ /* Left side */
+ .left {
+     display: flex;
+     gap: 16px;
+ }
+
+ /* Card tag */
+ .tag {
+     width: 40px;
+     height: 24px;
+     font-size: 10px;
+     font-weight: 700;
+     border-radius: 4px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color: #fff;
+     letter-spacing: .5px;
+ }
+
+ .visa {
+     background: #2563eb;
+ }
+
+ .mc {
+     background: #f97316;
+ }
+
+ /* Details */
+ .details .number {
+     font-weight: 600;
+     color: #333;
+     margin: 0;
+ }
+
+ .details .exp {
+     font-size: 13px;
+     color: #777;
+     margin: 3px 0 0 0;
+ }
+
+ .row {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+ }
+
+ /* Default badge */
+ .default {
+     background: #dbeafe;
+     color: #1d4ed8;
+     font-size: 11px;
+     padding: 2px 7px;
+     border-radius: 12px;
+     font-weight: 600;
+ }
+
+ /* Delete Button */
+ .delete-btn {
+     border: none;
+     background: transparent;
+     padding: 6px;
+     border-radius: 8px;
+     cursor: pointer;
+     transition: 0.2s;
+ }
+
+ .delete-btn:hover {
+     background: #d6e8ff;
+ }
+
+ .trash {
+     color: #666;
+ }
+
+ .delete-btn:hover .trash {
+     color: #0056b3;
+ }
+ .trash img{
+     width: 25px;
+     height: 25px;
+ }
+
+ /* Add Payment Button */
+ .add-btn {
+     width: 100%;
+     padding: 14px;
+     background: #fff;
+     border: 1px solid #ccc;
+     border-radius: 10px;
+     font-size: 15px;
+     font-weight: 600;
+     cursor: pointer;
+     transition: 0.25s;
+ }
+
+ .add-btn:hover {
+     background: #f2f2f2;
+     border-color: #999;
+ }
+     /* Responsive */
+     @media (max-width: 600px) {
+         .form-group {
+             flex-direction: column;
+         }
+
+         .form-group label {
+             margin-bottom: 0.5rem;
+         }
+
+         .order-header {
+             flex-direction: column;
+             align-items: flex-start;
+         }
+
+         .order-header .actions {
+             margin-top: 0.5rem;
+         }
+     }

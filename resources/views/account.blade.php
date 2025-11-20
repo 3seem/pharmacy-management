@@ -1,0 +1,238 @@
+@extends('Layout2.navbar')
+
+@section('content')
+
+    @section('title')
+    <title>Account</title>
+    @endsection
+    @section('stylesheet')
+    <link rel="stylesheet" href="../assets/CSS/account.css">
+    @endsection
+
+<body>
+
+    <div class="user-container">
+        <div class="tabs">
+            <div class="tab active" data-tab="overview">Overview</div>
+            <div class="tab" data-tab="orders">Orders</div>
+            <div class="tab" data-tab="settings">Settings</div>
+        </div>
+        <!-- Overview Tab Content -->
+        <div id="overview" class="tab-content active">
+            <h2>Profile Information</h2>
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" value="Sarah Johnson">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" value="sarah.johnson@email.com">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" value="+1 (555) 123-4567">
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" value="123 Main Street, Apt 4B, New York, NY 10001">
+            </div>
+            <button class="update-btn" id="redeemBtn">Update information</button>
+            <div class="loyalty">
+                <p><strong>Member since:</strong> January 2023</p>
+            </div>
+            <div class="recent-orders">
+                <h2>Recent Orders</h2>
+                <div class="order-item">
+                    <div class="left-item">
+                        <strong>ORD-1243</strong>
+                        <div class="date"><span>2025-11-15</span></div>
+                    </div>
+                    <div class="right-item">
+                        <strong>$45.99</strong>
+                        <div class="status"><span>Delivered</span></div>
+                    </div>
+                </div>
+                <div class="order-item">
+                    <div class="left-item">
+                        <strong>ORD-1198</strong>
+                        <div class="date"><span>2025-10-28</span></div>
+                    </div>
+                    <div class="right-item">
+                        <strong>$32.50</strong>
+                        <div class="status"><span>Delivered</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Orders Tab Content -->
+        <div id="orders" class="tab-content">
+            <div class="order-history">
+                <h2>Order History</h2>
+                <div class="order-list">
+                    <div class="order-entry">
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div>
+                                    <strong>ORD-1243</strong><br>
+                                    <span class="order-date">November 15, 2025</span>
+                                </div>
+                                <span class="status delivered">Delivered</span>
+                            </div>
+
+                            <div class="order-body">
+                                <div class="order-total">
+                                    <span>Total</span>
+                                    <strong>$45.99</strong>
+                                </div>
+                                <div class="tracking">
+                                    <span>Tracking Number</span>
+                                    <strong>TRK123456789</strong>
+                                </div>
+                            </div>
+
+                            <div class="actions"></div>
+                            <button class="view-details">View Details ▼</button>
+                        </div>
+
+                        <div class="order-details">
+                            <p><strong>Order items:</strong></p>
+
+                            <div class="history">
+                                <div class="main-details">
+                                    <h4>Ibuprofen 200mg</h4>
+                                    <h3>$12.99</h3>
+                                </div>
+                                <h4>Quantity: <span>1</span></h4>
+                            </div>
+
+                            <div class="history">
+                                <div class="main-details">
+                                    <h4>Vitamin D3 1000</h4>
+                                    <h3>$15.00</h3>
+                                </div>
+                                <h4>Quantity: <span>2</span></h4>
+                            </div>
+
+                            <div class="history">
+                                <div class="main-details">
+                                    <h4>First Aid Kit</h4>
+                                    <h3>$18.00</h3>
+                                </div>
+                                <h4>Quantity: <span>1</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Settings Tab Content -->
+        <div id="settings" class="tab-content">
+            <div class="settings-section security">
+                <h2>Change Password</h2>
+                <form id="passwordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" placeholder="Enter current password">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirm new password">
+                    </div>
+                    <button type="submit">Change Password</button>
+                </form>
+            </div>
+            <div class="pay-container">
+                <!-- Header -->
+                <div class="header">
+                    <h1>Payment Methods</h1>
+                </div>
+
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="left">
+                        <div class="tag visa">VISA</div>
+
+                        <div class="details">
+                            <div class="row">
+                                <p class="number">•••• •••• •••• 4532</p>
+                                <span class="default">Default</span>
+                            </div>
+                            <p class="exp">Expires 12/26</p>
+                        </div>
+                    </div>
+
+                    <div class="actions"></div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="left">
+                        <div class="tag mc">MC</div>
+
+                        <div class="details">
+                            <p class="number">•••• •••• •••• 8721</p>
+                            <p class="exp">Expires 09/27</p>
+                        </div>
+                    </div>
+
+                    <button class="delete-btn" aria-label="Delete Payment Method">
+                        
+                         <div class="trash"><img src="../assets/images/delete.png" alt="delete icon"></div>
+                    </button>
+                </div>
+
+                <!-- Add button -->
+                <button class="add-btn">Add Payment Method</button>
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+        // Tab switching logic
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-tab');
+                // Activate tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                // Show corresponding content
+                tabContents.forEach(tc => {
+                    if (tc.id === target) {
+                        tc.classList.add('active');
+                    } else {
+                        tc.classList.remove('active');
+                    }
+                });
+            });
+        });
+        //order details
+        document.addEventListener("DOMContentLoaded", () => {
+            const buttons = document.querySelectorAll(".view-details");
+
+            buttons.forEach(button => {
+                button.addEventListener("click", () => {
+                    const orderCard = button.closest(".order-entry");
+                    const details = orderCard.querySelector(".order-details");
+
+                    // Toggle visibility
+                    details.classList.toggle("active");
+
+                    // Change button text
+                    if (details.classList.contains("active")) {
+                        button.textContent = "Hide Details ▲";
+                    } else {
+                        button.textContent = "View Details ▼";
+                    }
+                });
+            });
+        });
+    </script>
+
+@endsection
