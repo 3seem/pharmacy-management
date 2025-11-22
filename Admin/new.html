@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>page</title>
+    <link rel="stylesheet" href="">
+    <style>
+        body {
+            margin: 8px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff, #ffffff, #faf5ff);
+            color: #1f2937;
+        }
+
+        /* container center */
+        .container {
+            width: min(96%, 1400px);
+            margin: 0 auto;
+        }
+
+        /* header */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e6e6e6;
+            box-shadow: 0 6px 20px rgba(12, 17, 23, 0.06);
+            padding: 18px 0;
+            margin-bottom: 18px;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo {
+            color: #0061ff;
+            font-size: 30px;
+            font-weight: bolder;
+        }
+
+        .gradient-circle {
+            background: linear-gradient(155deg, #0061ff, #DBECFE);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.12);
+        }
+
+        .muted {
+            color: #6b7280;
+            margin: 0;
+            font-size: 13px;
+        }
+
+        .strong {
+            color: #111827;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            margin-left: 12px;
+            font-size: 14px;
+        }
+
+        .gradient-circle-sm {
+            background: linear-gradient(155deg, #0061ff, #DBECFE);
+            margin-left: 12px;
+        }
+
+        .head-title {
+            margin: 30px 50px;
+        }
+
+        .card-flat {
+            background: #fff;
+            border-radius: 20px;
+            border: 1px solid #eef2f7;
+            padding: 10px;
+            box-shadow: 0 6px 20px rgba(12, 17, 23, 0.06);
+            ;
+            margin-bottom: 16px;
+        }
+
+        @media (min-width: 700px) {
+            .hide-sm {
+                display: flex;
+            }
+        }
+
+
+        /* SIDEBAR */
+        .sidebar {
+            background: white;
+            height: 100vh;
+            border-right: 1px solid #e5e5e5;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+            border-radius: 15px;
+            background-color: #DBECFE;
+        }
+
+        /* SIDEBAR HEADER */
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .sidebar-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0061ff;
+        }
+
+        /* ICON BUTTON */
+        .icon-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 6px;
+        }
+
+        .icon-btn:hover {
+            background: #f2f2f2;
+            border-radius: 8px;
+        }
+
+        /* MENU */
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 20px;
+            transition: background 0.2s;
+        }
+
+        .menu a:hover {
+            background: #f2f2f2;
+            border-radius: 6px;
+        }
+
+        /* main content spacing */
+        .main {
+            padding: 8px 0 28px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-title">Menu</span>
+            <button id="closeSidebar" class="icon-btn">&times;</button>
+        </div>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+                <li><a href="Sales&Transactions.html"><span class="icon">🛒</span> Sales & Transaction</a></li>
+                <li><a href="medicines management.html"><span class="icon">💊</span> Medicine Management</a></li>
+                <li><a href="Suppliers.html"><span class="icon">🚚</span> Suppliers Management</a></li>
+                <li><a href="order.html"><span class="icon">📦</span> Order Management System</a></li>
+                <li><a href="#"><span class="icon">⚙️</span> Settings</a></li>
+                <li><a href="#"><span class="icon">📄</span> Settings</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Header -->
+    <header class="header card-flat">
+        <div class="container header-inner">
+            <div class="header-left">
+                <button id="openSidebar" class="icon-btn menu-toggle">☰</button>
+                <div class="logo">PharmaCare</div>
+            </div>
+
+            <div class="header-right hide-sm">
+                <div class="text-right">
+                    <p class="muted small">Cashier</p>
+                    <p class="strong">Mohamed Ahmed</p>
+                </div>
+                <div class="avatar gradient-circle-sm">MA</div>
+            </div>
+        </div>
+    </header>
+    <!-- Page Content -->
+    <main class="container main">
+
+    </main>
+
+    <script>
+        // Sidebar
+        const sidebar = document.getElementById("sidebar");
+        const openBtn = document.getElementById("openSidebar");
+        const closeBtn = document.getElementById("closeSidebar");
+
+        openBtn.addEventListener("click", () => {
+            sidebar.classList.add("open");
+        });
+
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.remove("open");
+        });
+    </script>
+</body>
+
+</html>
