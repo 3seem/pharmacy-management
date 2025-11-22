@@ -3,8 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->group(
-    function () {
+// Route::middleware('auth')->group(
+//     function () {
 Route::get('/', function () {
     return view('welcome');
 });
@@ -24,8 +24,8 @@ Route::get('/account', function () {
 Route::get('/product_details', function () {
     return view('product_details');
 });
-    }
-);
+//     }
+// );
 
 Route::get('/dashboard', function () {
     return view('dashboard');

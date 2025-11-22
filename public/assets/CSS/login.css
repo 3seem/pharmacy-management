@@ -68,44 +68,6 @@ form {
     font-size: 1rem;
     color: #0c1d5a;
 }
-/* radio */
-.radio {
-    display: flex;
-    justify-content: space-around;
-    margin: 15px 0;
-}
-
-.radio label {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    color: #0c1d5a; 
-    cursor: pointer;
-    gap: 5px;
-}
-
-.radio input[type="radio"] {
-    accent-color: #007bff; 
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-}
-
-.login-button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #0c1d5a; /* Dark blue button */
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.login-button:hover {
-    opacity: 0.9;
-}
 
 .forgot-password {
     display: block;
