@@ -27,6 +27,32 @@ Route::get('/product_details', function () {
 //     }
 // );
 
+Route::get('/admin-dashboard', function () {
+    return view('admin.admin-dashboard');
+});
+
+Route::get('/medicine', function () {
+    return view('admin.medicine');
+});
+
+
+
+Route::get('/orders', function () {
+    return view('admin.orders');
+});
+
+Route::get('/sales', function () {
+    return view('admin.sales');
+});
+
+Route::get('/suppliers', function () {
+    return view('admin.suppliers');
+});
+
+Route::get('/usermanagement', function () {
+    return view('admin.usermanagement');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

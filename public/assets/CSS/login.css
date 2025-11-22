@@ -68,6 +68,21 @@ form {
     font-size: 1rem;
     color: #0c1d5a;
 }
+.login-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #0c1d5a; 
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    opacity: 0.9;
+}
 
 .forgot-password {
     display: block;

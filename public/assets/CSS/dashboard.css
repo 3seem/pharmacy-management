@@ -1,0 +1,638 @@
+/* Basic reset and variables */
+:root {
+    --bg1: #f0f9ff;
+    --bg2: #faf5ff;
+    --card-bg: #fff;
+    --muted: #6b7280;
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --primary-orange: #f59e0b;
+    --primary-red: rgb(251, 35, 35);
+    --radius: 20px;
+    --shadow: 0 6px 20px rgba(12, 17, 23, 0.06);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    color-scheme: light;
+}
+
+
+body {
+    margin: 8px;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f0f9ff, #ffffff, #faf5ff);
+}
+
+/* container center */
+.container {
+    width: min(96%, 1400px);
+    margin: 0 auto;
+}
+
+/* header */
+.header {
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6;
+    box-shadow: 0 6px 20px rgba(12, 17, 23, 0.06);
+    padding: 18px 0;
+    margin-bottom: 18px;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo {
+    color: #0061ff;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.gradient-circle {
+    background: linear-gradient(155deg, #0061ff, #DBECFE);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.12);
+}
+
+.muted {
+    color: var(--muted);
+    margin: 0;
+    font-size: 13px;
+}
+
+.strong {
+    color: #111827;
+    font-weight: 600;
+    margin: 0;
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    margin-left: 12px;
+    font-size: 14px;
+}
+
+.gradient-circle-sm {
+    background: linear-gradient(155deg, #0061ff, #DBECFE);
+    margin-left: 12px;
+}
+
+.head-title {
+    margin: 30px 50px;
+}
+
+/* SIDEBAR */
+.sidebar {
+    background: white;
+    height: 100vh;
+    border-right: 1px solid #e5e5e5;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar.open {
+    transform: translateX(0);
+    border-radius: 15px;
+    background-color: #DBECFE;
+}
+
+/* SIDEBAR HEADER */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.sidebar-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0061ff;
+}
+
+/* ICON BUTTON */
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 6px;
+}
+
+.icon-btn:hover {
+    background: #f2f2f2;
+    border-radius: 8px;
+}
+
+/* MENU */
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    text-decoration: none;
+    color: #374151;
+    font-size: 20px;
+    transition: background 0.2s;
+}
+
+.menu a:hover {
+    background: #f2f2f2;
+    border-radius: 6px;
+}
+
+
+
+/* main content spacing */
+.main {
+    padding: 8px 0 28px;
+}
+
+/* cards and sections */
+.card-flat {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    border: 1px solid #eef2f7;
+    padding: 10px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+}
+
+.section {
+    margin-bottom: 22px;
+}
+
+/* key matrics */
+.key-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-section {
+    padding: 1rem 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+    padding-left: 0.5rem;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+    display: grid;
+    gap: 1.75rem;
+    margin: 15px;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+/* Tablet/Desktop Styles */
+@media (min-width: 768px) {
+    .metrics-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 3. Metric Card Styling (Static) */
+.metric-card {
+    background-color: #DBECFE;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-base);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-medium);
+    margin-bottom: 0.5rem;
+}
+
+.card-value {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    min-height: 2rem;
+}
+
+/* Growth Indicator */
+.growth-indicator {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-green);
+    display: flex;
+    align-items: center;
+}
+
+.growth-indicator svg {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.25rem;
+}
+
+/* Icon Badge - Centering fix applied here */
+.icon-badge {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #007bff;
+    flex-shrink: 0;
+}
+
+/* Specific Icon Colors */
+.sales-badge {
+    background-color: var(--primary-blue);
+}
+
+.lowstock-badge {
+    background-color: var(--secondary-orange);
+}
+
+.pending-badge {
+    background-color: var(--secondary-purple);
+}
+
+/* Alert Badge (for Low Stock and Pending) */
+.alert-badge {
+    position: absolute;
+    top: 0;
+    right: 1.5rem;
+    background-color: var(--primary-red);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.4);
+}
+
+/* Specific styles for Low Stock and Pending card content */
+.low-stock-detail,
+.pending-detail {
+    font-size: 0.875rem;
+    color: var(--text-medium);
+    margin-top: 0.25rem;
+}
+
+/* 4. Time Period Selector (Daily/Weekly/Monthly) */
+.time-selector {
+    display: flex;
+    background-color: #e5e7eb;
+    border-radius: var(--radius);
+    padding: 0.25rem;
+}
+
+.time-btn {
+    padding: 0.35rem 1rem;
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--text-medium);
+    transition: background-color 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+
+.time-btn.active {
+    background-color: white;
+    box-shadow: var(--shadow-base);
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+
+.grid-two {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 12px;
+}
+
+@media(min-width:1000px) {
+    .grid-two {
+        grid-template-columns: 1fr 360px;
+        align-items: start;
+        gap: 22px;
+    }
+}
+
+
+.col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+
+/* right column */
+.col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* alert */
+.card-flat .alerts-card {
+    max-width: 800px;
+    margin: 0 auto;
+    display: block;
+}
+
+
+/* 2. Card Styles */
+
+.panel-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-base);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: calc(100vh - 3rem);
+}
+
+.alert-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+}
+
+.alert-count {
+    background-color: var(--primary-red);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.1rem 0.5rem;
+    border-radius: 9999px;
+    margin-left: 0.5rem;
+}
+
+/* 3. Filter Controls */
+
+.alerts-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.filter-controls {
+    display: flex;
+    background-color: #e5e7eb;
+    border-radius: var(--radius);
+    padding: 0.25rem;
+}
+
+.filter-btn {
+    padding: 0.35rem 1rem;
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--text-medium);
+    transition: background-color 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+
+.filter-btn.active {
+    background-color: white;
+    box-shadow: var(--shadow-base);
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* 4. Alerts List */
+.alerts-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+/* Individual Alert Item */
+.alert-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: var(--radius);
+    border-left: 4px solid;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+}
+
+.alert-item:hover {
+    background-color: #f3f4f6;
+}
+
+.alert-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.375rem;
+}
+
+.alert-content {
+    flex-grow: 1;
+}
+
+.alert-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0 0 0.25rem 0;
+}
+
+.alert-content p {
+    font-size: 0.875rem;
+    color: var(--text-medium);
+    margin: 0;
+}
+
+.alert-content span {
+    display: block;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin-top: 0.25rem;
+}
+
+
+/* Low Stock Styling (Orange) */
+.low-stock {
+    background-color: #fff7ed;
+    border-left-color: var(--primary-orange);
+}
+
+.low-stock .alert-icon {
+    background-color: #fef3c7;
+    color: var(--primary-orange);
+}
+
+/* Expiring Styling (Red) */
+.expiring {
+    background-color: #fef2f2;
+    border-left-color: var(--primary-red);
+}
+
+.expiring .alert-icon {
+    background-color: #fee2e2;
+    color: var(--primary-red);
+}
+
+/* Utility for JavaScript filtering */
+.hidden {
+    display: none !important;
+}
+
+.no-alerts-message {
+    text-align: center;
+    padding: 1rem;
+    color: var(--text-medium);
+    font-style: italic;
+}
+
+/* TAGS */
+.tag {
+    margin-left: auto;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.low-tag {
+    background: #ffe5e5;
+    color: #e63946;
+}
+
+.exp-tag {
+    background: #fff6d3;
+    color: #b8860b;
+}
+
+/* ICON COLORS */
+.low {
+    color: #e63946;
+}
+
+.exp {
+    color: #b8860b;
+}
+
+
+/* Text inside item */
+.title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+}
+
+.desc {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Arrow */
+.arrow {
+    margin-left: auto;
+    font-size: 20px;
+    color: #aaa;
+    transition: 0.2s;
+}
+
+.quick-item:hover .arrow {
+    color: #666;
+    transform: translateX(3px);
+}
+
+
+
+/* small helpers */
+.small {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0;
+}
+
+.big {
+    font-size: 56px;
+    color: #d1d5db;
+    margin: 0;
+}
+
+/* responsive helpers */
+.hide-sm {
+    display: none;
+}
+
+@media(min-width:700px) {
+    .hide-sm {
+        display: flex;
+    }
+}

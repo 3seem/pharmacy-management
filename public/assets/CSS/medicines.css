@@ -1,0 +1,220 @@
+/* Modal backdrop and container */
+body{
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #f0f9ff, #ffffff, #faf5ff);
+  color: #1f2937;
+}
+/* container center */
+.container {
+    width: min(96%, 1400px);
+    margin: 0 auto;
+}
+
+/* header */
+.header {
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6;
+    box-shadow: 0 6px 20px rgba(12, 17, 23, 0.06);
+    padding: 18px 0;
+    margin-bottom: 18px;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo {
+    color: #0061ff;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.gradient-circle {
+    background: linear-gradient(155deg, #0061ff, #DBECFE);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.12);
+}
+
+.muted {
+    color: #6b7280;
+    margin: 0;
+    font-size: 13px;
+}
+
+.strong {
+    color: #111827;
+    font-weight: 600;
+    margin: 0;
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    margin-left: 12px;
+    font-size: 14px;
+}
+
+.gradient-circle-sm {
+    background: linear-gradient(155deg, #0061ff, #DBECFE);
+    margin-left: 12px;
+}
+
+.head-title {
+    margin: 30px 0;
+}
+
+.card-flat {
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid #eef2f7;
+    padding: 10px;
+    box-shadow: 0 6px 20px rgba(12, 17, 23, 0.06);;
+    margin-bottom: 16px;
+}
+
+@media (min-width: 700px) {
+    .hide-sm {
+        display: flex;
+    }
+}
+
+
+/* SIDEBAR */
+.sidebar {
+    background: white;
+    height: 100vh;
+    border-right: 1px solid #e5e5e5;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar.open {
+    transform: translateX(0);
+    border-radius: 15px;
+    background-color: #DBECFE;
+}
+
+/* SIDEBAR HEADER */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.sidebar-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0061ff;
+}
+
+/* ICON BUTTON */
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 6px;
+}
+
+.icon-btn:hover {
+    background: #f2f2f2;
+    border-radius: 8px;
+}
+
+/* MENU */
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    text-decoration: none;
+    color: #374151;
+    font-size: 20px;
+    transition: background 0.2s;
+}
+
+.menu a:hover {
+    background: #f2f2f2;
+    border-radius: 6px;
+}
+
+/* main content spacing */
+.main {
+    padding: 8px 0 28px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+.modal .modal-content {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+/* Show modal when JS adds 'show' class */
+.modal.show { display: flex; }
+
+/* Badge styles */
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.75em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 0.25rem;
+}
+.badge-default {
+  background-color: #e2e8f0;
+  color: #1a202c;            
+}
+.badge-secondary {
+  background-color: #faf089; 
+  color: #744210;           
+}
+.badge-destructive {
+  background-color: #feb2b2; 
+  color: #742a2a;          
+}
+
+/* Button active state for stock adjustment */
+.active-button {
+  background-color: #2563eb; 
+  color: white;
+}
