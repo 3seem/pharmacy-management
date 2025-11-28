@@ -19,15 +19,7 @@
   </header>
 
   <div class="main">
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="container hero-content">
-      <h1>PharmaCare</h1>
-      <img src="..\assets\images\headerphoto.png" alt="PharmaCare">
-      <p>Operational bottlenecks, frequent billing errors, and mismanaged schedules can lead to revenue loss and frustrated patients.</p>
-      <button class="btn-secondary" id="register">Get in Touch</button>
-    </div>
-  </section>
+
 
   <!-- PROBLEMS GRID -->
   <section class="problems container">
@@ -51,63 +43,47 @@
     </div>
   </section>
 
-  <!-- New Products -->
-        <section class="products new-products">
+
+
+
+
+
+
+        <!--  Products -->
+    
+
+<section class="products new-products" id="products">
+                
             <div class="container">
-                <h2>New Products</h2>
-                <div class="product-grid">
-                    <article class="product-card">
-                        <img src="..\assets\images\foley.png" alt="Foley Catheter">
-                        <h3>Foley Catheter</h3>
-                        <p class="price">$29.99 <span class="old-price">$39.99</span></p>
+                <h2 style="display:inline">Products</h2>
+
+<div class="filter-bar" style="margin-left: 830px; display:inline; align-items:center; gap:15px;">
+    <label for="categoryFilter" style="font-weight:700; font-size:22px;">Category :</label>
+
+    <select id="categoryFilter" style="padding:8px 12px; border-radius:6px; border:1px solid #ccc;">
+        <option value="all">All</option>
+        @foreach ($categories as $cat)
+            <option data-filter=".{{str_replace(' ', '', $cat->Category)}}" value="{{ $cat->Category }}">{{ $cat->Category }}</option>
+        @endforeach
+    </select>
+</div>
+
+                <div class="product-grid" style="margin: 10px">
+        @foreach ($medicine as $item)
+            <div class="{{str_replace(' ', '', $item->Category)}}">
+                    <article class="product-card" >
+                        <img src="../assets/images/foley.png" alt="Foley Catheter">
+                        <h3 class="details">{{$item->Name}}</h3>
+                        <p class="price">${{$item->Price}} </p>
                         <a href="#" class="btn">Add to Cart</a>
                     </article>
+            </div>
+        @endforeach
 
                 </div>
-            </div>
-        </section>
 
-        <!-- Popular Products -->
-        <section class="products popular-products">
-            <div class="container">
-                <h2>Popular Products</h2>
-                <div class="product-grid">
-                    <article class="product-card">
-                        <img src="..\assets\images\oxygen mask.png" alt="Oxygen Mask">
-                        <h3>Oxygen Mask</h3>
-                        <p class="price">$19.99 <span class="old-price">$29.99</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </article>
-
-                </div>
             </div>
-        </section>
-        <!-- Medical Products -->
-        <section class="products medical-products">
-            <div class="container">
-                <h2>Medical Products</h2>
-                <div class="product-grid">
-                    <article class="product-card">
-                        <img src="..\assets\images\Sphygmomanometer.png" alt="Sphygmomanometer">
-                        <h3>Sphygmomanometer</h3>
-                        <p class="price">$55.00 <span class="old-price">$70.00</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </article>
 
-                </div>
-            </div>
-        </section>
-
-        <!-- Hot Offer Banner -->
-        <section class="hot-offer">
-            <div class="container hot-offer-content">
-                <div class="offer-text">
-                    <h2>Today's Hot Offer</h2>
-                    <h3>Unlock 50% Off on Essential Medicines!</h3>
-                    <p>Don't miss out on our limited-time offer to save on essential healthcare products.</p>
-                </div>
-                    <img src="..\assets\images\essential medicines.png" alt="Prescription medicine bottles">
-            </div>
         </section>
 
     <!-- Footer -->
@@ -117,16 +93,51 @@
  <script>
     //Home script
     document.getElementById("loginBtn").addEventListener("click", () => {
-         window.location.href = "../Customer/login.html";
+         window.location.href = "/login";
     });
 
     document.getElementById("registerBtn").addEventListener("click", () => {
-        window.location.href = "../Customer/register.html";
+        window.location.href = "/register";
     });
 
-    document.getElementById("register").addEventListener("click", () => {
-        window.location.href = "../Customer/register.html";
+    
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Buttons
+    document.getElementById("loginBtn").addEventListener("click", () => {
+         window.location.href = "/login";
     });
+
+    document.getElementById("registerBtn").addEventListener("click", () => {
+        window.location.href = "/register";
+    });
+
+    // Filtering
+    const filterSelect = document.getElementById('categoryFilter');
+    const productItems = document.querySelectorAll('.product-grid > div');
+
+    filterSelect.addEventListener('change', function () {
+        const selected = this.value.replace(/\s+/g, '');
+
+        productItems.forEach(item => {
+            let itemCat = item.classList[0];
+
+            if (selected === "all") {
+                item.style.display = "block";
+            } else {
+                if (itemCat === selected) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            }
+        });
+    });
+
+});
+
+
+
  </script>
 </body>
 </html>

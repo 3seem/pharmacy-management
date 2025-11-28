@@ -2,15 +2,28 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 // Route::middleware('auth')->group(
 //     function () {
 Route::get('/', function () {
-    return view('welcome');
+    $medicine=DB::table('medicine')->get();
+    $categories = DB::table('medicine')->select('Category')->distinct()->get();
+    // dd($categories);
+    return view('welcome', [
+        "medicine" => $medicine,
+        "categories" => $categories
+    ]);
 });
 
 Route::get('/pharmacare', function () {
-    return view('pharmacare');
+    $medicine=DB::table('medicine')->get();
+    $categories = DB::table('medicine')->select('Category')->distinct()->get();
+    // dd($categories);
+    return view('pharmacare', [
+        "medicine" => $medicine,
+        "categories" => $categories
+    ]);
 });
 
 Route::get('/cart', function () {
@@ -19,7 +32,7 @@ Route::get('/cart', function () {
 
 Route::get('/account', function () {
     return view('account');
-});
+}); 
 
 Route::get('/product_details', function () {
     return view('product_details');

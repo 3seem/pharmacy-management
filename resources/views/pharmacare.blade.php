@@ -12,105 +12,46 @@
 
 
     <main>
-        <!-- Hero Banner -->
-        <section class="hero-banner">
-            <div class="container hero-content">
-                <div class="hero-text">
-                    <h1>Your Prescription for Affordable Health Solutions!</h1>
-                    <p>Welcome to PharmaCare, where we bring you trusted healthcare products and expert advice right to your door.</p>
-                    <a href="#products" class="btn primary-btn">Shop Now</a>
-                </div>
-                <div class="hero-image">
-                    <img src="../assets/images/medicine.png" alt="Doctor holding medication">
-                </div>
-            </div>
-        </section>
 
-        <!-- New Products -->
+
+
+
+        <!--  Products -->
+
         <section class="products new-products" id="products">
+                
             <div class="container">
-                <h2>New Products</h2>
-                <div class="product-grid">
-                    <article class="product-card">
+                <h2 style="display:inline">Products</h2>
+
+<div class="filter-bar" style="margin-left: 800px; display:inline; align-items:center; gap:15px;">
+    <label for="categoryFilter" style="font-weight:700; font-size:22px;">Category :</label>
+
+    <select id="categoryFilter" style="padding:8px 12px; border-radius:6px; border:1px solid #ccc;">
+        <option value="all">All</option>
+        @foreach ($categories as $cat)
+            <option data-filter=".{{str_replace(' ', '', $cat->Category)}}" value="{{ $cat->Category }}">{{ $cat->Category }}</option>
+        @endforeach
+    </select>
+</div>
+
+                <div class="product-grid" style="margin: 10px">
+        @foreach ($medicine as $item)
+            <div class="{{str_replace(' ', '', $item->Category)}}">
+                    <article class="product-card" >
                         <img src="../assets/images/foley.png" alt="Foley Catheter">
-                        <h3 class="details">Foley Catheter</h3>
-                        <p class="price">$29.99 <span class="old-price">$39.99</span></p>
+                        <h3 class="details">{{$item->Name}}</h3>
+                        <p class="price">${{$item->Price}}  </p>
                         <a href="#" class="btn">Add to Cart</a>
                     </article>
+            </div>
+        @endforeach
 
                 </div>
+
             </div>
+
         </section>
 
-        <!-- Popular Products -->
-        <section class="products popular-products">
-            <div class="container">
-                <h2>Popular Products</h2>
-                <div class="product-grid">
-                    <article class="product-card">
-                        <img src="../assets/images/oxygen mask.png" alt="Oxygen Mask">
-                        <h3 class="details">Oxygen Mask</h3>
-                        <p class="price">$19.99 <span class="old-price">$29.99</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </article>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Top Products -->
-        <section class="products top-products">
-            <div class="container">
-                <h2>Top Products</h2>
-                <div class="product-grid">
-                    <article class="product-card">
-                        <img src="https://via.placeholder.com/150" alt="Hospital Bed">
-                        <h3 class="details">Hospital Bed</h3>
-                        <p class="price">$120.00 <span class="old-price">$150.00</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </article>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats -->
-        <section class="stats">
-            <div class="container stat-container">
-                <div class="stat">
-                    <h3>14K+</h3>
-                    <p>Orders Completed</p>
-                </div>
-                <div class="stat">
-                    <h3>250+</h3>
-                    <p>Awards Achieved</p>
-                </div>
-                <div class="stat">
-                    <h3>8K+</h3>
-                    <p>Happy Customers</p>
-                </div>
-                <div class="stat">
-                    <h3>12K+</h3>
-                    <p>Product Reviews</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Medical Products -->
-        <section class="products medical-products">
-            <div class="container">
-                <h2>Medical Products</h2>
-                <div class="product-grid">
-                    <article class="product-card">
-                        <img src="../assets/images/Sphygmomanometer.png" alt="Sphygmomanometer">
-                        <h3 class="details">Sphygmomanometer</h3>
-                        <p class="price">$55.00 <span class="old-price">$70.00</span></p>
-                        <a href="#" class="btn">Add to Cart</a>
-                    </article>
-
-                </div>
-            </div>
-        </section>
 
      <!-- Footer -->
     
@@ -126,5 +67,38 @@
 
         });
         });
+    // Filter by Category
+    // document.getElementById("categoryFilter").addEventListener("change", function () {
+    //     const selected = this.value;
+
+    //     if (selected === "all") {
+    //         window.location.href = "/pharmacare"; 
+    //     } else {
+    //         window.location.href = `/pharmacare?category=${selected}`;
+    //     }
+    // });
+
+    const filterSelect = document.getElementById('categoryFilter');
+    const productItems = document.querySelectorAll('.product-grid > div');
+
+    filterSelect.addEventListener('change', function () {
+        const selected = this.value;
+
+        productItems.forEach(item => {
+            if (selected === "all") {
+                item.style.display = "block"; 
+            } else {
+                let itemCat = item.classList[0];
+
+                if (itemCat === selected.replace(/\s+/g, '')) {
+                    item.style.display = "block"; 
+                } else {
+                    item.style.display = "none"; 
+                }
+            }
+        });
+    });
+
     </script>
+
 @endsection
