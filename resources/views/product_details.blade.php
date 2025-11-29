@@ -29,7 +29,6 @@
             </div>
             <div class="price">
                 <span class="current-price">$15.99</span>
-                <span class="original-price">$22.99</span>
             </div>
             <div class="description">
                 <p>Stay prepared and monitor temperature with confidence

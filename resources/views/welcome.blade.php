@@ -75,7 +75,7 @@
                         <img src="../assets/images/foley.png" alt="Foley Catheter">
                         <h3 class="details">{{$item->Name}}</h3>
                         <p class="price">${{$item->Price}} </p>
-                        <a href="#" class="btn">Add to Cart</a>
+                        <a href="/register" class="btn">Add to Cart</a>
                     </article>
             </div>
         @endforeach
