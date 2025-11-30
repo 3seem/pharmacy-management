@@ -41,6 +41,7 @@
                         <img src="../assets/images/foley.png" alt="Foley Catheter">
                         <h3 class="details">{{$item->Name}}</h3>
                         <p class="price">${{$item->Price}}  </p>
+                        <a href="{{route('product_details',$item->medicine_id)}}" class="btn">  View  </a>
                         <a href="#" class="btn">Add to Cart</a>
                     </article>
             </div>
@@ -60,13 +61,17 @@
 
     <script>
         //Product script
-        document.querySelectorAll('.details').forEach(item => {
-            item.addEventListener("click", () => {
-            // window.location.href = "../Customer/product_details.html";
-            window.location.href = "/product_details";
 
-        });
-        });
+
+      //  document.querySelectorAll('.details').forEach(item => {
+        //    item.addEventListener("click", () => {
+            // window.location.href = "../Customer/product_details.html";
+          //  window.location.href = "/product_details";
+
+       // });
+       // });
+
+
     // Filter by Category
     // document.getElementById("categoryFilter").addEventListener("change", function () {
     //     const selected = this.value;

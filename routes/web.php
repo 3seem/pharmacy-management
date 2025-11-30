@@ -34,9 +34,10 @@ Route::get('/account', function () {
     return view('account');
 }); 
 
-Route::get('/product_details', function () {
-    return view('product_details');
-});
+Route::get('/product_details/{id}', function ($medicine_id=id) {
+    $medicine=DB::table('medicine')->where('medicine_id', $medicine_id)->first();
+    return view('product_details',["medicine"=>$medicine]);
+})->name("product_details");
 //     }
 // );
 

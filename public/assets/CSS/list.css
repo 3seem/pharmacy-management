@@ -193,7 +193,7 @@ header {
 .product-card .btn:hover {
     background-color: #007bff;
 }
-.details{
+/* .details{
   transition: all 0.3s ease; 
   cursor: pointer;  
 }
@@ -201,7 +201,7 @@ header {
 .details:hover {
   font-size: 1.3em;           
   font-weight: bold;           
-}
+} */
 
 /* Stats */
 .stats {
