@@ -1,21 +1,17 @@
 @extends('Layout2.navbar')
 
 @section('content')
-    @section('title')
-    <title>Cart</title>
-    @endsection
-    @section('stylesheet')
-    <link rel="stylesheet" href="../assets/CSS/cart.css">
-    @endsection
+@section('title')
+<title>Cart</title>
+@endsection
+@section('stylesheet')
+<link rel="stylesheet" href="../assets/CSS/cart.css">
+@endsection
 
 <body>
 
 <div class="pharmacy-container">
 
-    <!-- Header -->
-
-
-    <!-- Cart Page -->
     <main class="cart-page">
         <div class="cart-container">
 
@@ -26,36 +22,54 @@
                 <!-- Cart Items -->
                 <div class="cart-items-section">
 
-                    <!-- Cart Item 1 -->
-                    <div class="cart-item-card">
-                        <div class="item-main">
-                            <div class="item-image">
-                                <div class="item-icon"><img src="../assets/images/thermometer.png" alt="product image"></div>
-                            </div>
-
-                            <div class="item-details">
-                                <div class="item-header-row">
-                                    <h3 class="item-name">Digital thermometer</h3>
+                    @if($cart->count() == 0)
+                        <p style="font-size:20px; margin-top:20px;">Your cart is empty.</p>
+                    @else
+                        @foreach ($cart as $item)
+                        <div class="cart-item-card">
+                            <div class="item-main">
+                                <div class="item-image">
+                                    <img src="../assets/images/foley.png" alt="product">
                                 </div>
 
-                                <p class="item-description">Digital thermometer offers quick accurate temperature readings with clear display</p>
-                            </div>
-                        </div>
-
-                        <div class="item-actions">
-
-                            <div class="quantity-controls">
-                                <button class="quantity-btn">−</button>
-                                <span class="quantity-value">2</span>
-                                <button class="quantity-btn">+</button>
+                                <div class="item-details">
+                                    <h3 class="item-name">{{ $item->medicine->Name }}</h3>
+                                    <p class="item-description">${{ $item->medicine->Price }}</p>
+                                </div>
                             </div>
 
-                            <div class="item-total">$17.98</div>
+                            <div class="item-actions">
 
-                            <button class="remove-btn"><img src="../assets/images/delete.png" alt="delete icon"></button>
+                                <!-- Quantity Update Form -->
+                                <form action="{{ route('cart.update') }}" method="POST" class="quantity-controls">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $item->id }}">
+
+                                    <button class="quantity-btn" name="quantity" value="{{ max(1, $item->quantity - 1) }}">−</button>
+
+                                    <span class="quantity-value">{{ $item->quantity }}</span>
+
+                                    <button class="quantity-btn" name="quantity" value="{{ $item->quantity + 1 }}">+</button>
+                                </form>
+
+                                <!-- Item Total -->
+                                <div class="item-total">
+                                    ${{ $item->quantity * $item->medicine->Price }}
+                                </div>
+
+                                <!-- Remove Button -->
+                                <form action="{{ route('cart.remove') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $item->id }}">
+                                    <button class="remove-btn">
+                                        <img src="../assets/images/delete.png" alt="delete">
+                                    </button>
+                                </form>
+
+                            </div>
                         </div>
-                    </div>
-
+                        @endforeach
+                    @endif
 
                 </div>
 
@@ -66,12 +80,12 @@
 
                     <div class="summary-row">
                         <span>Subtotal</span>
-                        <span>$55.47</span>
+                        <span>${{ $cart->sum(fn($i) => $i->medicine->Price * $i->quantity) }}</span>
                     </div>
 
                     <div class="summary-row">
                         <span>Tax</span>
-                        <span>$4.43</span>
+                        <span>${{ number_format($cart->sum(fn($i) => $i->medicine->Price * $i->quantity) * 0.08 ,2) }}</span>
                     </div>
 
                     <div class="summary-row">
@@ -83,7 +97,11 @@
 
                     <div class="summary-row summary-total">
                         <span>Total</span>
-                        <span>$59.90</span>
+                        @php
+                            $subtotal = $cart->sum(fn($i) => $i->medicine->Price * $i->quantity);
+                            $total = $subtotal + ($subtotal * 0.08);
+                        @endphp
+                        <span>${{ number_format($total, 2) }}</span>
                     </div>
 
                     <button class="checkout-btn">Proceed to Checkout</button>

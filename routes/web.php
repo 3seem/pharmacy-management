@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\medicines;
 use App\Http\Controllers\audit_logs;
@@ -36,6 +37,12 @@ Route::get('/pharmacare', function () {
 Route::get('/cart', function () {
     return view('cart');
 });
+
+Route::post('/cart/add', [CartController::class, 'add'])->middleware('auth')->name('cart.add');
+Route::get('/cart', [CartController::class, 'show'])->middleware('auth')->name('cart.show');
+Route::post('/cart/update', [CartController::class, 'update'])->middleware('auth')->name('cart.update');
+Route::post('/cart/remove', [CartController::class, 'remove'])->middleware('auth')->name('cart.remove');
+
 
 Route::get('/account', function () {
     return view('account');
