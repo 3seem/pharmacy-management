@@ -104,6 +104,18 @@ class usermange extends Controller
         return view('admin.usermange.editcust', compact('customer'));
     }
 
+    
+
+    public function editEmployee($id)
+    {
+        $employee = DB::table('users')
+            ->join('employees', 'users.id', '=', 'employees.id')
+            ->select('users.*', 'employees.Salary', 'employees.Hire_Date', 'employees.employment_status')
+            ->where('users.id', $id)
+            ->first();
+        return view('admin.usermange.editemp', compact('employee'));
+    }
+
     public function updateCustomer(Request $request, $id)
     {
         $request->validate([
@@ -123,17 +135,7 @@ class usermange extends Controller
             $password
         ]);
 
-        return redirect()->route('admin.usermange.index')->with('success', 'Customer updated successfully!');
-    }
-
-    public function editEmployee($id)
-    {
-        $employee = DB::table('users')
-            ->join('employees', 'users.id', '=', 'employees.id')
-            ->select('users.*', 'employees.Salary', 'employees.Hire_Date', 'employees.employment_status')
-            ->where('users.id', $id)
-            ->first();
-        return view('admin.usermange.editemp', compact('employee'));
+        return redirect()->route('admin.usermanagement')->with('success', 'Customer updated successfully!');
     }
 
     public function updateEmployee(Request $request, $id)
@@ -141,29 +143,22 @@ class usermange extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'Salary' => 'required|numeric',
-            'Hire_Date' => 'required|date',
+            'salary' => 'required|numeric',
             'employment_status' => 'required',
             'password' => 'nullable|min:6'
         ]);
 
         $password = $request->password ? bcrypt($request->password) : null;
 
-        DB::statement("CALL sp_UpdateEmployee(?, ?, ?, ?, ?)", [
-            $id,
-            $request->name,
-            $request->email,
-            $request->Salary,
-            $request->employment_status
+        DB::statement("CALL sp_UpdateEmployee(?, ?, ?, ?, ?, ?)", [
+            $id,                              // p_id
+            $request->name,                   // p_name
+            $request->email,                  // p_email
+            $request->employment_status,      // p_status
+            (float) $request->salary,         // p_salary
+            $password                         // p_password
         ]);
-        if ($request->password) {
-            DB::table('users')->where('id', $id)->update([
-                'password' => Hash::make($request->password)
-            ]);
-        }
 
-
-
-        return redirect()->route('admin.usermange.index')->with('success', 'Employee updated successfully!');
+        return redirect()->route('admin.usermanagement')->with('success', 'Employee updated successfully!');
     }
 }

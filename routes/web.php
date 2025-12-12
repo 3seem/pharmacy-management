@@ -164,9 +164,6 @@ Route::put('/supplier/{supplier}', [Suplliers::class, 'update'])->name('admin.su
 
 // usermanagement
 
-Route::get('/usermanagement', function () {
-    return view('admin.usermange.usermanagement');
-});
 Route::get(
     '/usermanagement',
     [usermange::class, 'user']
