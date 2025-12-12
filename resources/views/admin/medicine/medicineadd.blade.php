@@ -1,0 +1,119 @@
+@extends('layouts.testlayout')
+
+@php
+$categories = [
+    'admin.dashboard' => ['text' => 'Admin Dashboard', 'route' => 'admin.dashboard'],
+    'usermanagement.index' => ['text' => 'User Management', 'route' => 'usermanagement.index'],
+    'medicine.index' => ['text' => 'Medicine', 'route' => 'medicine.index'],
+    'suppliers.index' => ['text' => 'Suppliers', 'route' => 'suppliers.index'],
+    'sales.index' => ['text' => 'Sales', 'route' => 'sales.index'],
+    'orders.index' => ['text' => 'Orders', 'route' => 'orders.index'],
+];
+@endphp
+
+<style>
+.form-box{
+    background:#0d0d0d;border:1px solid #1b1b1b;border-radius:10px;
+    padding:25px;margin-top:40px;width:70%;margin:auto;color:#ddd;
+}
+.form-box h2{text-align:center;margin-bottom:25px;color:#ff5c25;}
+
+.form-group{margin-bottom:18px;}
+.form-group label{display:block;margin-bottom:6px;font-size:15px;}
+.form-group input,.form-group select,.form-group textarea{
+    width:100%;padding:10px;background:#111;border:1px solid #333;
+    border-radius:6px;color:#eee;font-size:15px;
+}
+.form-group textarea{height:80px;resize:none;}
+
+.btn-save{
+    background:#ff5c25;border:none;color:white;padding:10px 22px;
+    border-radius:6px;font-size:15px;margin-top:10px;
+}
+.btn-cancel{
+    background:#444;border:none;color:white;padding:10px 22px;
+    border-radius:6px;font-size:15px;margin-left:8px;
+}
+</style>
+
+<br><br><br><br><br><br><br><br>
+<div class="form-box">
+    <h2>Add Medicine</h2>
+    @if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li style="color:red">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<form action="{{ route('admin.medicine.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+        <div class="form-group">
+            <label>Medicine Name</label>
+            <input type="text" name="Name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Category</label>
+            <input type="text" name="Category" required>
+        </div>
+
+        <div class="form-group">
+            <label>Price (EGP)</label>
+            <input type="number" step="0.01" name="Price" required>
+        </div>
+
+        <div class="form-group">
+            <label>Stock Quantity</label>
+            <input type="number" name="Stock" required>
+        </div>
+
+        <div class="form-group">
+            <label>Image</label>
+            <input type="file" name="image_url">
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="Description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Low Stock Threshold</label>
+            <input type="number" name="low_stock_threshold">
+        </div>
+
+        <div class="form-group">
+            <select name="dosage_form">
+                <option value="Tablet">Tablet</option>
+                <option value="Capsule">Capsule</option>
+                <option value="Syrup">Syrup</option>
+                <option value="Injection">Injection</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Strength</label>
+            <input type="text" name="strength">
+        </div>
+
+        <div class="form-group">
+            <label>generic_name</label>
+            <input type="text" name="generic_name">
+        </div>
+
+        <div class="form-group">
+            <label>Status</label>
+            <select name="is_active">
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+            </select>
+        </div>
+
+        <button class="btn-save">💾 Save</button>
+        <a href="{{ route('admin.medicine') }}" class="btn-cancel">Cancel</a>
+    </form>
+</div>
