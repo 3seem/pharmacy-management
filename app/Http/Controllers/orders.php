@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\order;
 use App\Models\Medicine;
 use App\Models\Category;
@@ -197,4 +198,76 @@ class orders extends Controller
                 ->with('error', $e->getMessage());
         }
     }
+    public function checkoutFromCart()
+    {
+        
+        $cart = Cart::with('medicine')
+            ->where('user_id', Auth::id())
+            ->get();
+        if ($cart->count() == 0) {
+            return redirect()->route('cart.index')
+                ->with('error', 'Your cart is empty');
+        }
+
+        DB::beginTransaction();
+
+        try {
+            // Get customer linked to logged-in user
+            $customer = Customer::where('id', Auth::id())->firstOrFail();
+
+            // 1️⃣ Create order (PENDING)
+            $order = order::create([
+                'Customer_ID'   => $customer->id,
+                'Employee_ID'   => null, // customer order
+                'Status'        => 'Pending',
+                'delivery_type' => 'delivery',
+                'Total_amount'  => 0,
+                'Order_Date'    => now(),
+            ]);
+
+            $totalAmount = 0;
+
+            // 2️⃣ Move cart items → order_items
+            foreach ($cart as $item) {
+                $medicine = $item->medicine;
+
+                // Stock check
+                if ($medicine->Stock < $item->quantity) {
+                    throw new \Exception($medicine->Name . ' out of stock');
+                }
+
+                $subtotal = $item->quantity * $medicine->Price;
+
+                order_item::create([
+                    'Order_ID'    => $order->Order_ID,
+                    'medicine_id' => $medicine->medicine_id,
+                    'Quantity'    => $item->quantity,
+                    'unit_price'  => $medicine->Price,
+                    'subtotal'    => $subtotal,
+                ]);
+
+                // Reduce stock
+                $medicine->decrement('Stock', $item->quantity);
+
+                $totalAmount += $subtotal;
+            }
+
+            // 3️⃣ Update order total
+            $order->update(['Total_amount' => $totalAmount]);
+
+            // 4️⃣ Clear cart
+            Cart::where('user_id', Auth::id())->delete();
+            Customer::where('id', $customer->id)
+                ->increment('total_purchases', $totalAmount);
+            DB::commit();
+
+            return redirect()->route('cart.index')
+                ->with('success', 'Order placed successfully and is pending.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()->route('cart.index')->with('error', $e->getMessage());
+        }
+}
+
 }
