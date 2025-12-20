@@ -30,13 +30,10 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'Employee_ID', 'id');
     }
-            public function items()
-        {
+    public function items()
+    {
             return $this->hasMany(order_item::class);
-        }
+    }
 
-        public function product()
-        {
-            return $this->belongsTo(Product::class);
-        }
+    
 }
