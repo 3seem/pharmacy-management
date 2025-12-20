@@ -11,11 +11,17 @@
     <link rel="stylesheet" href="../assets/CSS/list.css">
     @endsection
     @section('search')
-              <form class="search-form">
-                <input type="search" placeholder="Search entire store here">
-                <button type="submit">Search</button>
-            </form>
+    <form class="search-form" method="GET" action="{{ route('products.search') }}">
+        <input 
+            type="search" 
+            name="q" 
+            placeholder="Search by medicine name"
+            required
+        >
+        <button type="submit">Search</button>
+    </form>
     @endsection
+
 <body>
 
 

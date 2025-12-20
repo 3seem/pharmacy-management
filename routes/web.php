@@ -12,6 +12,7 @@ use App\Http\Controllers\usermange;
 use App\Models\supplier;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ProductController;
 
 
 // Route::middleware('auth')->group(
@@ -35,6 +36,10 @@ Route::get('/pharmacare', function () {
         "categories" => $categories
     ]);
 });
+
+
+Route::get('/search', [ProductController::class, 'search'])->name('products.search');
+
 
 Route::get('/cart', function () {
     return view('cart');
