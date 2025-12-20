@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\AccountController;
+
 
 // Route::middleware('auth')->group(
 //     function () {
@@ -40,6 +42,11 @@ Route::post('/cart/remove', [CartController::class, 'remove'])->middleware('auth
 Route::get('/account', function () {
     return view('account');
 }); 
+
+Route::put('/account/update', [AccountController::class, 'update'])
+    ->name('account.update')
+    ->middleware('auth');
+
 
 Route::get('/product_details/{id}', function ($medicine_id=id) {
     $medicine=DB::table('medicine')->where('medicine_id', $medicine_id)->first();

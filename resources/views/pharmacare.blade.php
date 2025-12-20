@@ -1,5 +1,7 @@
 @extends('Layout2.navbar')
 
+
+
 @section('content')
 
     @section('title')
@@ -7,6 +9,12 @@
     @endsection
     @section('stylesheet')
     <link rel="stylesheet" href="../assets/CSS/list.css">
+    @endsection
+    @section('search')
+              <form class="search-form">
+                <input type="search" placeholder="Search entire store here">
+                <button type="submit">Search</button>
+            </form>
     @endsection
 <body>
 

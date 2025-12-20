@@ -12,7 +12,8 @@
     <div class="container nav">
       <div class="logo">PharmaCare</div>
       <div class="btn-primary">
-      <button id="registerBtn">Get in Touch</button>
+
+      <button id="registerBtn">Register</button>
       <button id="loginBtn">Log in</button>
       </div>
     </div>
