@@ -10,10 +10,11 @@
     <header>
         <div class="container nav-container">
             <a href="/pharmacare" class="logo">PharmaCare</a>
-            <form class="search-form">
+            {{-- <form class="search-form">
                 <input type="search" placeholder="Search entire store here">
                 <button type="submit">Search</button>
-            </form>
+            </form> --}}
+            @yield("search")
             <nav class="main-nav">
                 <ul>
                     <li><a href="/pharmacare">All Categories</a></li>

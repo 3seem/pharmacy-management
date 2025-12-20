@@ -12,6 +12,9 @@ use App\Http\Controllers\Suplliers;
 use App\Http\Controllers\usermange;
 use App\Models\supplier;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ProductController;
+
 
 // Route::middleware('auth')->group(
 //     function () {
@@ -35,6 +38,10 @@ Route::get('/pharmacare', function () {
     ]);
 });
 
+
+Route::get('/search', [ProductController::class, 'search'])->name('products.search');
+
+
 Route::get('/cart', function () {
     return view('cart');
 });
@@ -42,6 +49,11 @@ Route::get('/cart', function () {
 Route::get('/account', function () {
     return view('account');
 }); 
+
+Route::put('/account/update', [AccountController::class, 'update'])
+    ->name('account.update')
+    ->middleware('auth');
+
 
 Route::get('/product_details/{id}', function ($medicine_id=id) {
     $medicine=DB::table('medicine')->where('medicine_id', $medicine_id)->first();

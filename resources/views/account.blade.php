@@ -18,7 +18,7 @@
         </div>
 
         <!-- Overview Tab Content -->
-        <div id="overview" class="tab-content active">
+        {{-- <div id="overview" class="tab-content active">
             <h2>Profile Information</h2>
             <div class="form-group">
                 <label for="fullName">Full Name</label>
@@ -40,7 +40,50 @@
             <div class="loyalty">
                 <p><strong>Member since:</strong> {{ Auth::user()->created_at->format('F Y') }}</p>
             </div>
+        </div> --}}
+
+<div id="overview" class="tab-content active">
+    <h2>Profile Information</h2>
+
+    @if(session('success'))
+        <p style="color: green">{{ session('success') }}</p>
+    @endif
+
+    <form action="{{ route('account.update') }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="name" value="{{ Auth::user()->name }}">
         </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" value="{{ Auth::user()->email }}">
+
+
+        </div>
+
+        <div class="form-group">
+            <label>Phone</label>
+            <input type="text" name="Phone" value="{{ Auth::user()->Phone }}">
+            @error('Phone')
+                <small style="color:red">{{ $message }}</small>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label>Address</label>
+            <input type="text" name="Address" value="{{ Auth::user()->Address }}">
+        </div>
+
+        <button type="submit" class="update-btn">
+            Update information
+        </button>
+    </form>
+</div>
+
 
         <!-- Orders Tab Content -->
         <div id="orders" class="tab-content">
