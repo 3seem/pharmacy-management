@@ -66,7 +66,7 @@
 .metric-label{font-size:14px;color:#ff8c00;}
 .metric-value{font-size:34px;font-weight:700;margin-top:8px;}
 </style>
-
+{{-- {{dd($orders)}} --}}
 <div class="wrapper">
 
     <!-- Metrics Summary -->
@@ -101,13 +101,13 @@
     <select name="status" class="select-dark">
         <option value="">All Status</option>
         <option value="pending"  
-        {{-- {{ request('status')=='pending'?'selected':'' }} --}}
+        {{ request('status')=='pending'?'selected':'' }}
         >Pending</option>
         <option value="completed" 
-        {{-- {{ request('status')=='completed'?'selected':'' }} --}}
+        {{ request('status')=='completed'?'selected':'' }}
         >Completed</option>
         <option value="cancelled" 
-        {{-- {{ request('status')=='cancelled'?'selected':'' }} --}}
+        {{ request('status')=='cancelled'?'selected':'' }}
         >Cancelled</option>
     </select>
 

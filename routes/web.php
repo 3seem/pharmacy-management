@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\medicines;
 use App\Http\Controllers\audit_logs;
+use App\Http\Controllers\batches;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\orders;
 use App\Http\Controllers\price_change_logs;
 use App\Http\Controllers\Suplliers;
@@ -38,12 +39,6 @@ Route::get('/cart', function () {
     return view('cart');
 });
 
-Route::post('/cart/add', [CartController::class, 'add'])->middleware('auth')->name('cart.add');
-Route::get('/cart', [CartController::class, 'show'])->middleware('auth')->name('cart.show');
-Route::post('/cart/update', [CartController::class, 'update'])->middleware('auth')->name('cart.update');
-Route::post('/cart/remove', [CartController::class, 'remove'])->middleware('auth')->name('cart.remove');
-
-
 Route::get('/account', function () {
     return view('account');
 }); 
@@ -64,10 +59,11 @@ Route::get('/product_details/{id}', function ($medicine_id=id) {
 
 
 // Admin
-Route::get('/admin-dashboard', function () {
-    return view('admin.dashboard.admin-dashboard');
-});
 
+Route::get(
+    '/admin-dashboard',
+    [DashboardController::class, 'index']
+)->name('admin.dashboard');
 
 
 // audit_logs done
@@ -75,6 +71,31 @@ Route::get(
     '/audit_logs',
     [audit_logs::class, 'audit']
 )->name('admin.audit_logs');
+
+
+
+
+// batches
+Route::get('/batches', [batches::class, 'index'])
+    ->name('admin.batches');
+
+Route::get('/batches/add', [batches::class, 'create'])
+    ->name('admin.batches.add');
+
+Route::post('/batches/store', [batches::class, 'store'])
+    ->name('admin.batches.store');
+
+Route::delete('/batches/{batch_number}', [batches::class, 'destroy'])
+    ->name('admin.batches.destroy');
+
+
+
+
+
+
+
+
+
 
 
 
@@ -87,7 +108,7 @@ Route::get(
 Route::get(
     '/admin-price-change',
     [price_change_logs::class, 'audit']
-)->name('admin.audit_logs');
+)->name('admin.price_logs');
 
 
 
@@ -134,10 +155,7 @@ Route::post('/orders/store', [orders::class, 'store'])
 
 
 
-// sales
-Route::get('/sales', function () {
-    return view('admin.sales');
-});
+
 
 
 
