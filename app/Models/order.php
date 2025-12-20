@@ -35,8 +35,5 @@ class Order extends Model
             return $this->hasMany(order_item::class);
     }
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
+    
 }
