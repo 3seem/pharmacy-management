@@ -32,11 +32,11 @@ class Order extends Model
     }
     public function items()
     {
-        return $this->hasMany(order_item::class, 'Order_ID', 'Order_ID');
+            return $this->hasMany(order_item::class);
     }
+
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
-
 }
