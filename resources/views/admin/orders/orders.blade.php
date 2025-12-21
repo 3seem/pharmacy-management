@@ -147,10 +147,10 @@
             @forelse($orders as $order)
                 <tr>
                     <td>
-                        {{ $order->customer->name }}
+                        {{ $order->customer->name?? ''}}
                     </td>
                     <td>
-                        {{ $order->employee->name }}
+                        {{ $order->employee->name??'' }}
                          </td>
                     <td>$
                         {{ number_format($order->Total_amount,2) }}
