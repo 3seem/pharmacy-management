@@ -37,9 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/remove', [Cart::class, 'remove'])
         ->name('cart.remove');
 });
-
-// Route::middleware('auth')->group(
-//     function () {
 Route::get('/', function () {
     $medicine = DB::table('medicines')->get();
     $categories = DB::table('medicines')->select('Category')->distinct()->get();
@@ -49,16 +46,20 @@ Route::get('/', function () {
         "categories" => $categories
     ]);
 });
+Route::middleware('auth')->group(
+    function () {
+        Route::get('/pharmacare', function () {
+            $medicine = DB::table('medicines')->get();
+            $categories = DB::table('medicines')->select('Category')->distinct()->get();
+            // dd($categories);
+            return view('pharmacare', [
+                "medicine" => $medicine,
+                "categories" => $categories
+            ]);
+        })->name('home');
 
-Route::get('/pharmacare', function () {
-    $medicine = DB::table('medicines')->get();
-    $categories = DB::table('medicines')->select('Category')->distinct()->get();
-    // dd($categories);
-    return view('pharmacare', [
-        "medicine" => $medicine,
-        "categories" => $categories
-    ]);
-});
+
+
 
 
 Route::get('/search', [ProductController::class, 'search'])->name('products.search');
@@ -79,8 +80,8 @@ Route::get('/product_details/{id}', function ($medicine_id = id) {
     $medicine = DB::table('medicines')->where('medicine_id', $medicine_id)->first();
     return view('product_details', ["medicine" => $medicine]);
 })->name("product_details");
-//     }
-// );
+    }
+);
 
 
 
