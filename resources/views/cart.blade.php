@@ -112,7 +112,17 @@
 </form>
     
 
-                    <button class="continue-shopping-btn-secondary">Continue Shopping</button>
+<a href="/pharmacare" class="continue-shopping-btn-secondary"
+style="
+        display: inline-block;
+        padding: 14px 90px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 8px;
+   "
+>
+    Continue Shopping
+</a>
 
                     <div class="payment-methods">
                         <p>We accept all major payment methods</p>

@@ -34,15 +34,20 @@
             <div class="description">
                 <p>{{$medicine->Description}}</p>
             </div>
-            <div class="quantity">
+            {{-- <div class="quantity">
                 <label for="qty">Quantity:</label>
                 <div class="quantity-selector">
                     <button class="quantity-btn">-</button>
                     <input type="text" id="qty" value="1" readonly>
                     <button class="quantity-btn">+</button>
                 </div>
-            </div>
-            <button class="add-to-cart">Add to Cart</button>
+            </div> --}}
+            
+                <form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $medicine->medicine_id }}">
+                    <button class="add-to-cart" type="submit"     style="width: 350px; padding: 14px;"  >Add to Cart</button>
+                </form>
             <div class="payment">
                 {{-- <div class="payment-icons">
                     <!-- Payment logos; these link to Wikimedia Commons images -->

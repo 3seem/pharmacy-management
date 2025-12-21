@@ -37,7 +37,7 @@
             <div class="container">
                 <h2 style="display:inline">Products</h2>
 
-<div class="filter-bar" style="margin-left: 800px; display:inline; align-items:center; gap:15px;">
+<div class="filter-bar" style="margin-left: 930px; display:inline; align-items:center; gap:15px;">
     <label for="categoryFilter" style="font-weight:700; font-size:22px;">Category :</label>
 
     <select id="categoryFilter" style="padding:8px 12px; border-radius:6px; border:1px solid #ccc;">

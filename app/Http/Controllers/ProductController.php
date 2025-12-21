@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         $search = $request->q;
 
-        $medicine = DB::table('medicines') // <-- make sure table name is correct
+        $medicine = DB::table('medicines')
             ->where('Name', 'LIKE', '%' . $search . '%')
             ->get();
 

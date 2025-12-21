@@ -19,9 +19,15 @@
                 @forelse ($medicine as $item)
                     <div>
                         <article class="product-card">
-                            <img src="../assets/images/foley.png" alt="{{ $item->Name }}">
+                            {{-- <img src="../assets/images/foley.png" alt="{{ $item->Name }}"> --}}
+                            <div style="display:flex; justify-content:center; align-items:center;">
+                                <img src="../assets/images/foley.png" alt="{{ $item->Name }}">
+                            </div>
+
                             <h3>{{ $item->Name }}</h3>
                             <p class="price">${{ $item->Price }}</p>
+                            <a href="{{route('product_details',$item->medicine_id)}}" class="btn">  View  </a>
+
                             <form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $item->medicine_id }}">
