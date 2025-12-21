@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
 
 class Order extends Model
 {
@@ -30,13 +31,15 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'Employee_ID', 'id');
     }
-            public function items()
-        {
-            return $this->hasMany(order_item::class);
-        }
+    public function items()
+    {
+        return $this->hasMany(order_item::class, 'Order_ID', 'Order_ID');
+        // 'Order_ID' => column in order_items table
+        // 'id'       => column in orders table
+    }
 
-        public function product()
-        {
-            return $this->belongsTo(Product::class);
-        }
+    // public function product()
+    // {
+    //     return $this->belongsTo(Product::class);
+    // }
 }
