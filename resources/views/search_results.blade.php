@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="../assets/CSS/list.css">
 @endsection
 
+
 @section('content')
 <main>
     <section class="products new-products" id="products">
