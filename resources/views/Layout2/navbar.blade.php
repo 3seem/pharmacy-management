@@ -14,6 +14,27 @@
                 PharmaCare
             </a>
 
+            <!-- Enhanced Search Bar -->
+            <div class="flex-1 max-w-xl mx-8">
+                <form action="/search" method="GET" class="relative">
+                    <input 
+                        type="text" 
+                        name="q"
+                        placeholder="Search for medicines, health products..." 
+                        class="w-full px-5 py-2.5 pl-12 pr-12 text-sm bg-gray-50 border-2 border-gray-200 rounded-full focus:outline-none focus:bg-white focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all duration-200 placeholder-gray-400"
+                    />
+                    <svg class="absolute left-4 top-3 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <button 
+                        type="submit"
+                        class="absolute right-2 top-1.5 px-4 py-1.5 bg-blue-500 text-white text-sm font-medium rounded-full hover:bg-blue-600 transition-colors duration-200"
+                    >
+                        Search
+                    </button>
+                </form>
+            </div>
+
             <nav class="main-nav flex items-center space-x-6">
                 <a href="/pharmacare" class="text-gray-700 hover:text-blue-500 transition font-medium">
                     All Categories

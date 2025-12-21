@@ -19,9 +19,9 @@ class ProductController extends Controller
     {
         $search = $request->q;
 
-        $medicine = DB::table('medicine')
-                    ->where('Name', 'LIKE', "%{$search}%")
-                    ->get();
+        $medicine = DB::table('medicines') // <-- make sure table name is correct
+            ->where('Name', 'LIKE', '%' . $search . '%')
+            ->get();
 
         return view('search_results', compact('medicine', 'search'));
     }
