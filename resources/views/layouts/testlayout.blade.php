@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html data-wf-domain="www.tensorstax.com" data-wf-page="67ed3d92b4bc8a71132f2b37"
     data-wf-site="67ed3d92b4bc8a71132f2b27" lang="en-US">
@@ -10,69 +9,68 @@
 
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     
-    {{-- IMPORTANT: You must ensure these files are accessible in your public folder --}}
-    <link
-        href="https://cdn.prod.website-files.com/67ed3d92b4bc8a71132f2b27/css/tensorstax-main.webflow.shared.323240d42.min.css"
+    {{-- Webflow CSS --}}
+    <link href="https://cdn.prod.website-files.com/67ed3d92b4bc8a71132f2b27/css/tensorstax-main.webflow.shared.323240d42.min.css"
         rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
     <script type="text/javascript">
         WebFont.load({
-            google: {
-                families: ["Bitter:400,700,400italic", "Fragment Mono:regular"]
-            }
+            google: { families: ["Bitter:400,700,400italic", "Fragment Mono:regular"] }
         });
     </script>
     <script type="text/javascript">
-        ! function(o, c) {
-            var n = c.documentElement,
-                t = " w-mod-";
-            n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n
-                .className += t + "touch")
+        !function(o, c) {
+            var n = c.documentElement, t = " w-mod-";
+            n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
         }(window, document);
     </script>
-    {{-- End of required Webflow scripts/styles --}}
 
-    {{-- Custom styles for scrollbar and text animation fix --}}
+    {{-- Custom styles --}}
     <style>
         ::-webkit-scrollbar { width: 0px; }
         .char { display: inline-block; }
-        .hero_part { padding-top: 100px; padding-bottom: 100px; } /* Adding padding for content */
-        /* Add a custom style for the active nav link */
-        .link_box.active .dot_link { background-color: red; } /* Orange dot for active link */
+        .hero_part { padding-top: 100px; padding-bottom: 100px; }
+        .link_box.active .dot_link { background-color: red; }
+        /* Mobile menu */
+        @media (max-width: 768px) {
+            .menu { display: none; flex-direction: column; }
+            .menu.open { display: flex; background: #111; padding: 20px; }
+        }
     </style>
 </head>
 
 <body>
-    {{-- --------------------------------------- --}}
-    {{-- Nav Bar (Header) - Included on all pages --}}
-    {{-- --------------------------------------- --}}
+    {{-- Header / Navbar --}}
     <div class="header">
         <div class="wrapper">
             <div class="flexbox middle">
-                <a href="" class="logotype w-inline-block">
+                {{-- Logo --}}
+                <a href="{{ route('admin.dashboard') }}" class="logotype w-inline-block">
                     <img src="https://cdn.prod.website-files.com/67ed3d92b4bc8a71132f2b27/67ed414f42ae0d552b5eff31_logotype-header.svg"
                         loading="lazy" alt="Pharmacy Logo" class="image" />
                 </a>
+
+                {{-- Navigation Menu --}}
                 <div class="menu">
-                    {{-- Navigation Links --}}
                     @php
                         $navLinks = [
                             'admin.dashboard' => ['text' => 'Admin Dashboard', 'route' => 'admin.dashboard'],
-                            'usermanagement.index' => ['text' => 'User Management', 'route' => 'usermanagement.index'],
-                            'medicine.index' => ['text' => 'Medicine', 'route' => 'medicine.index'],
-                            'suppliers.index' => ['text' => 'Suppliers', 'route' => 'suppliers.index'],
-                            'sales.index' => ['text' => 'Sales', 'route' => 'sales.index'],
-                            'orders.index' => ['text' => 'Orders', 'route' => 'orders.index'],
-                            'adminlogs.index'=>['text'=>'Admin Logs'],
-                            'pricelogs.index'=>['text'=>'Price Change Logs'],
+                            'admin.usermanagement' => ['text' => 'User Management', 'route' => 'admin.usermanagement'],
+                            'admin.medicine' => ['text' => 'Medicine', 'route' => 'admin.medicine'],
+                            'admin.suppliers' => ['text' => 'Suppliers', 'route' => 'admin.suppliers'],
+                            'admin.orders' => ['text' => 'Orders', 'route' => 'admin.orders'],
+                            'admin.batches' => ['text' => 'Batches', 'route' => 'admin.batches'],
+                            'adminlogs.index'=> ['text'=>'Admin Logs','route'=>'admin.audit_logs'],
+                            'pricelogs.index'=> ['text'=>'Price Change Logs','route'=>'admin.price_logs'],
                         ];
                     @endphp
 
                     @foreach ($navLinks as $name => $link)
-                        <a letters-fade-in-random-hover="" href="
-                            class="link_box w-inline-block {{ Request::routeIs($name) ? 'active' : '' }}">
+                        <a letters-fade-in-random-hover
+                           href="{{ route($link['route']) }}"
+                           class="link_box w-inline-block {{ Request::routeIs($link['route']) ? 'active' : '' }}">
                             <div class="flex_link">
                                 <div class="dot_link"></div>
                                 <div class="link_txt">{{ $link['text'] }}</div>
@@ -80,9 +78,10 @@
                         </a>
                     @endforeach
 
-                    {{-- Example Button for Logout --}}
-                    <a letters-fade-in-random-hover="" href="{{ route('logout') }}"
-                        class="link_box primary w-inline-block" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    {{-- Logout Button --}}
+                    <a letters-fade-in-random-hover href="{{ route('logout') }}"
+                       class="link_box primary w-inline-block"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <div class="flex_link">
                             <div class="dot_link"></div>
                             <div class="link_txt">Logout</div>
@@ -92,9 +91,10 @@
                         @csrf
                     </form>
                 </div>
-                {{-- Mobile Hamburger Menu (Requires JS/Animation logic to function) --}}
+
+                {{-- Mobile Hamburger --}}
                 <div class="mobile_hamburger">
-                    <a data-w-id="5f4f932a-747c-09bd-02fa-59696d1f77d0" href="#" class="link_box w-inline-block">
+                    <a href="#" class="link_box w-inline-block">
                         <div class="flex_link">
                             <div class="hamburger_mobile">
                                 <div class="lline_1"></div>
@@ -110,18 +110,31 @@
             </div>
         </div>
     </div>
-    
 
-    {{-- Final Webflow Script required for animations and interactions --}}
-    <script src="https://d3e54v103j8qkm.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=67ed3d92b4bc8a71132f2b27"
-        type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
+    {{-- Page Content --}}
+    <div class="page-content">
+        @yield('content')
+    </div>
+
+    {{-- Webflow Scripts --}}
+    <script src="https://d3e54v103j8qkm.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.prod.website-files.com/67ed3d92b4bc8a71132f2b27/js/webflow.755026ff4.js"></script>
+    <script src="https://cdn.prod.website-files.com/67ed3d92b4bc8a71132f2b27/67f1b29a28fa4d9241b1af2a_text-split-custom.js"></script>
+
+    {{-- Mobile Hamburger JS --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.querySelector('.mobile_hamburger a');
+            const menu = document.querySelector('.menu');
+
+            hamburger.addEventListener('click', function (e) {
+                e.preventDefault();
+                menu.classList.toggle('open');
+            });
+        });
     </script>
-    <script id="webflow-js"
-        src="https://cdn.prod.website-files.com/67ed3d92b4bc8a71132f2b27/js/webflow.755026ff4.js"
-        type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/67ed3d92b4bc8a71132f2b27/67f1b29a28fa4d9241b1af2a_text-split-custom.js" type="text/javascript"></script>
-    
-    {{-- Placeholder for additional page-specific scripts --}}
+
+    {{-- Additional page-specific scripts --}}
     @stack('scripts')
 </body>
 </html>

@@ -57,7 +57,9 @@
                         <p class="price">${{$item->Price}}  </p>
                         <a href="{{route('product_details',$item->medicine_id)}}" class="btn">  View  </a>
                         {{-- <a href="#" class="btn">Add to Cart</a> --}}
-                        <form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
+                        <form action="
+                        {{ route('cart.add') }}
+                         " method="POST" style="display:inline;">
                             @csrf
                             <input type="hidden" name="id" value="{{ $item->medicine_id }}">
                             <button class="btn" type="submit">Add to Cart</button>

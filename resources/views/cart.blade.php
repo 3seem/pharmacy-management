@@ -104,7 +104,14 @@
                         <span>${{ number_format($total, 2) }}</span>
                     </div>
 
-                    <button class="checkout-btn">Proceed to Checkout</button>
+                    <form action="{{ route('checkout.cart') }}" method="POST">
+    @csrf
+    <button class="checkout-btn" {{ $cart->count() == 0 ? 'disabled' : '' }}>
+        Proceed to Checkout
+    </button>
+</form>
+    
+
                     <button class="continue-shopping-btn-secondary">Continue Shopping</button>
 
                     <div class="payment-methods">

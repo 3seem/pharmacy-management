@@ -90,7 +90,7 @@
             <div class="order-history">
                 <h2>Order History</h2>
                     <div class="order-list">
-                            @forelse(Auth::user()->orders ?? [] as $order)
+                            @forelse(Auth::user()->orders()->with('items.medicine')->get() as $order)
                         <div class="order-entry">
                             <div class="order-card">
                                 <div class="order-header">
@@ -104,11 +104,11 @@
                                 <div class="order-body">
                                     <div class="order-total">
                                         <span>Total</span>
-                                        <strong>${{ $order->total }}</strong>
+                                        <strong>${{ $order->Total_amount }}</strong>
                                     </div>
                                     <div class="tracking">
                                         <span>Tracking Number</span>
-                                        <strong>{{ $order->tracking_number }}</strong>
+                                        <strong>{{ $order->Order_ID }}</strong>
                                     </div>
                                 </div>
 
@@ -120,10 +120,10 @@
                                 @foreach($order->items as $item)
                                 <div class="history">
                                     <div class="main-details">
-                                        <h4>{{ $item->product->name }}</h4>
-                                        <h3>${{ $item->price }}</h3>
+                                        <h4>{{ $item->medicine->Name }}</h4>
+                                        <h3>${{ $item->unit_price }}</h3>
                                     </div>
-                                    <h4>Quantity: <span>{{ $item->quantity }}</span></h4>
+                                    <h4>Quantity: <span>{{ $item->Quantity }}</span></h4>
                                 </div>
                                 @endforeach
                             </div>
