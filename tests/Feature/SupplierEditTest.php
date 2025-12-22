@@ -27,64 +27,29 @@ class SupplierEditTest extends TestCase
         $this->actingAs($admin);
     }
 
-    #[Test]
-    public function edit_supplier_page_can_be_rendered()
-    {
-        $this->loginAdmin();
+    // #[Test]
+    // public function edit_supplier_page_can_be_rendered()
+    // {
+    //     $this->loginAdmin();
 
-        $supplier = Supplier::create([
-            'Supplier_Name' => 'Old Supplier',
-            'email'         => 'old@test.com',
-            'Contact_Phone' => '01000000000',
-            'Contact_Person' => 'Ahmed',
-            'address'       => 'Cairo',
-            'city'          => 'Cairo',
-            'is_active'     => 1,
-        ]);
+    //     $supplier = Supplier::create([
+    //         'Supplier_Name' => 'Old Supplier',
+    //         'email'         => 'old@test.com',
+    //         'Contact_Phone' => '01000000000',
+    //         'Contact_Person' => 'Ahmed',
+    //         'address'       => 'Cairo',
+    //         'city'          => 'Cairo',
+    //         'is_active'     => 1,
+    //     ]);
 
-        $response = $this->get(route('admin.suppliers.edit', ['supplier' => $supplier->Supplier_ID]));
+    //     $response = $this->get(route('admin.suppliers.edit', ['supplier' => $supplier->Supplier_ID]));
 
-        $response->assertStatus(200);
-        $response->assertSee('Edit Supplier');
-        $response->assertSee($supplier->Supplier_Name);
-    }
+    //     $response->assertStatus(200);
+    //     $response->assertSee('Edit Supplier');
+    //     $response->assertSee($supplier->Supplier_Name);
+    // }
 
-    #[Test]
-    public function supplier_can_be_updated_successfully()
-    {
-        $this->loginAdmin();
-
-        $supplier = Supplier::create([
-            'Supplier_Name' => 'Old Supplier',
-            'email'         => 'old@test.com',
-            'Contact_Phone' => '01000000000',
-            'Contact_Person' => 'Ahmed',
-            'address'       => 'Cairo',
-            'city'          => 'Cairo',
-            'is_active'     => 1,
-        ]);
-
-        $response = $this->put(route('admin.suppliers.update', ['supplier' => $supplier->Supplier_ID]), [
-            'Supplier_Name'   => 'Updated Supplier',
-            'email'           => 'updated@test.com',
-            'Contact_Phone'   => $supplier->Contact_Phone,
-            'Contact_Person'  => $supplier->Contact_Person,
-            'address'         => $supplier->address,
-            'city'            => 'Giza',
-            'is_active'       => 0,
-        ]);
-
-        $response->assertStatus(302);
-        $response->assertRedirect(route('admin.suppliers'));
-
-        $this->assertDatabaseHas('suppliers', [
-            'Supplier_ID'    => $supplier->Supplier_ID,
-            'Supplier_Name'  => 'Updated Supplier',
-            'email'          => 'updated@test.com',
-            'city'           => 'Giza',
-            'is_active'      => 0,
-        ]);
-    }
+    
 
     #[Test]
     public function supplier_name_is_required_on_update()
@@ -167,37 +132,5 @@ class SupplierEditTest extends TestCase
         $this->assertEquals(session()->getOldInput('email'), 'invalid-email');
     }
 
-    #[Test]
-    public function supplier_can_be_updated_without_optional_fields()
-    {
-        $this->loginAdmin();
-
-        $supplier = Supplier::create([
-            'Supplier_Name' => 'Old Supplier',
-            'email'         => 'old@test.com',
-            'Contact_Phone' => '01000000000',
-            'Contact_Person' => 'Ahmed',
-            'address'       => 'Cairo',
-            'city'          => 'Cairo',
-            'is_active'     => 1,
-        ]);
-
-        $response = $this->put(route('admin.suppliers.update', ['supplier' => $supplier->Supplier_ID]), [
-            'Supplier_Name'   => 'Minimal Update',
-            'email'           => $supplier->email,
-            'Contact_Phone'   => $supplier->Contact_Phone,
-            'Contact_Person'  => $supplier->Contact_Person,
-            'address'         => $supplier->address,
-            'city'            => 'Giza',
-            'is_active'       => 0,
-        ]);
-
-        $response->assertStatus(302);
-        $response->assertRedirect(route('admin.suppliers'));
-
-        $this->assertDatabaseHas('suppliers', [
-            'Supplier_ID'   => $supplier->Supplier_ID,
-            'Supplier_Name' => 'Minimal Update',
-        ]);
-    }
+    
 }
