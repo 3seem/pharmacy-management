@@ -82,7 +82,7 @@
         <tbody>
         @foreach($audit_logs as $log)
             <tr>
-                <td>{{ $log->user->name ?? 'System' }}</td>
+                <td>{{ $log->user->Name ?? 'System' }}</td>
                 <td>{{ $log->table_name }}</td>
 
                 <td>
