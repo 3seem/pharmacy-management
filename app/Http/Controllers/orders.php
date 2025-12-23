@@ -40,6 +40,22 @@ class orders extends Controller
 
         return view('admin.orders.orders', compact('orders', 'total_orders', 'pending', 'Completed', 'Total_amount'));
     }
+    public function markCompleted(order $order)
+    {
+        // Only update if order is pending
+        if ($order->Status === 'Pending') {
+            $order->update([
+                'Status'      => 'Completed',
+                'Employee_ID' => Auth::id(), // set current logged-in employee
+                'updated_at'  => now(),
+            ]);
+
+            return redirect()->back()->with('success', 'Order marked as Completed.');
+        }
+
+        return redirect()->back()->with('error', 'Order is already completed.');
+    }
+
     public function destroy($id)
     {
         $order = order::findOrFail($id);

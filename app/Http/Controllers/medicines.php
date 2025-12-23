@@ -9,11 +9,55 @@ use Illuminate\Http\Request;
 class medicines extends Controller
 {
     //
-    public function medcine()
+    public function medcine(Request $request)
     {
-        $medicines =medicine::get();
-        return view('admin.medicine.medicine', compact('medicines'));
+        // Get filters from request
+        $search = $request->query('search');
+        $category = $request->query('category');
+        $stock = $request->query('stock');
+
+        // Base query
+        $query = medicine::query();
+
+        // Search filter
+        if ($search) {
+            $query->where('Name', 'like', "%{$search}%")
+                ->orWhere('generic_name', 'like', "%{$search}%");
+        }
+
+        // Category filter
+        if ($category) {
+            $query->where('Category', $category);
+        }
+
+        // Stock filter
+        if ($stock === 'low') {
+            $query->whereColumn('Stock', '<=', 'low_stock_threshold');
+        } elseif ($stock === 'available') {
+            $query->where('Stock', '>', 0);
+        }
+
+        $medicines = $query->get();
+
+        // For filter dropdown
+        $categories = medicine::select('Category')->distinct()->pluck('Category');
+
+        // Top metrics
+        $totalStock = medicine::sum('Stock');
+        $lowStockCount = medicine::whereColumn('Stock', '<=', 'low_stock_threshold')->count();
+        $expiringSoonCount = 0; // If you track expiration, implement here
+        $totalTypes = medicine::count();
+
+        return view('admin.medicine.medicine', compact(
+            'medicines',
+            'categories',
+            'totalStock',
+            'lowStockCount',
+            'expiringSoonCount',
+            'totalTypes'
+        ));
     }
+
     public function destroy(medicine $medicine)
     {
         if ($medicine->poster && file_exists(public_path($medicine->image_url))) {

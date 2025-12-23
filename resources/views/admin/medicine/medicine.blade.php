@@ -2,16 +2,7 @@
    {{-- Use the layout file you sent --}}
 
                     
-                     @php
-                        $categories = [
-                            'admin.dashboard' => ['text' => 'Admin Dashboard', 'route' => 'admin.dashboard'],
-                            'usermanagement.index' => ['text' => 'User Management', 'route' => 'usermanagement.index'],
-                            'medicine.index' => ['text' => 'Medicine', 'route' => 'medicine.index'],
-                            'suppliers.index' => ['text' => 'Suppliers', 'route' => 'suppliers.index'],
-                            'sales.index' => ['text' => 'Sales', 'route' => 'sales.index'],
-                            'orders.index' => ['text' => 'Orders', 'route' => 'orders.index'],
-                        ];
-                    @endphp
+                     
                     <style>
 .search-filter-box{
     display:flex;gap:15px;align-items:center;margin:30px 0;
@@ -94,59 +85,52 @@
 {{-- Title under hero automatically --}}
 <div class="wrapper">
     
-    {{-- TOP METRIC CARDS --}}
-    <div class="card-row">
-        <div class="metric-card">
-            <div class="metric-label">Total Stock</div>
-            <div class="metric-value">{{ $totalStock ?? '1250' }}</div>
-        </div>
-
-        <div class="metric-card">
-            <div class="metric-label">Low Stock Alerts</div>
-            <div class="metric-value">{{ $lowStockCount ?? '8' }}</div>
-        </div>
-
-        <div class="metric-card">
-            <div class="metric-label">Expiring Soon</div>
-            <div class="metric-value">{{ $expiringSoonCount ?? '15' }}</div>
-        </div>
-
-        <div class="metric-card">
-            <div class="metric-label">Medicines Available</div>
-            <div class="metric-value">{{ $totalTypes ?? '180' }}</div>
-        </div>
+   {{-- TOP METRIC CARDS --}}
+<div class="card-row">
+    <div class="metric-card">
+        <div class="metric-label">Total Stock</div>
+        <div class="metric-value">{{ $totalStock }}</div>
     </div>
-<form method="GET" class="search-filter-box">
 
+    <div class="metric-card">
+        <div class="metric-label">Low Stock Alerts</div>
+        <div class="metric-value">{{ $lowStockCount }}</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-label">Expiring Soon</div>
+        <div class="metric-value">{{ $expiringSoonCount }}</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-label">Medicines Available</div>
+        <div class="metric-value">{{ $totalTypes }}</div>
+    </div>
+</div>
+
+{{-- FILTER FORM --}}
+<form method="GET" class="search-filter-box">
     <input type="text" name="search" value="{{ request('search') }}"
-           placeholder="Search medicine..."
-           class="input-dark" style="width:240px;">
+           placeholder="Search medicine..." class="input-dark" style="width:240px;">
 
     <select name="category" class="select-dark">
         <option value="">All Categories</option>
         @foreach($categories as $cat)
-            <option value="
-            {{-- {{ $cat }} --}}
-            "
-                {{-- {{ request('category')==$cat?'selected':'' }} --}}
-                >
-                {{-- {{ $cat }} --}}
+            <option value="{{ $cat }}" {{ request('category') == $cat ? 'selected' : '' }}>
+                {{ $cat }}
             </option>
         @endforeach
     </select>
 
     <select name="stock" class="select-dark">
         <option value="">Any Stock</option>
-        <option value="low"
-         {{-- {{ request('stock')=='low'?'selected':'' }} --}}
-         >Low Stock</option>
-        <option value="available"
-         {{-- {{ request('stock')=='available'?'selected':'' }} --}}
-         >In Stock</option>
+        <option value="low" {{ request('stock') == 'low' ? 'selected' : '' }}>Low Stock</option>
+        <option value="available" {{ request('stock') == 'available' ? 'selected' : '' }}>In Stock</option>
     </select>
 
     <button class="btn-orange">Filter</button>
 </form>
+
 {{-- {{dd($medicines)}} --}}
     {{-- Action Button --}}
     <div style="margin-top:35px;">
@@ -187,8 +171,8 @@
                     <td>
                         {{ $medicine->Price }}
                     </td>
-                    <td style="width:40px;  ">
-                        <img src="{{ asset($medicine->image_url) }}"
+                    <td style="width:40px;  height:40px;">
+                        <img style="width:40px;  height:40px;"  src="{{ asset($medicine->image_url) }}"
                                                              class="img-fluid rounded"
                                                              alt="{{ $medicine->Name }}">
                     </td>

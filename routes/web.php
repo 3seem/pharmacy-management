@@ -99,6 +99,8 @@ Route::middleware(['auth', 'verified', IsAdmin::class])->group(
             [DashboardController::class, 'index']
         )->name('admin.dashboard');
 
+        Route::post('/orders/{order}/complete', [App\Http\Controllers\orders::class, 'markCompleted'])
+            ->name('orders.complete');
 
         // audit_logs done
         Route::get(

@@ -189,6 +189,12 @@
                             {{ route('orders.edit', $order->Order_ID) }}    
                           " class="btn-orange">🔍</a>
 
+                           @if($order->Status == 'Pending')
+        <form action="{{ route('orders.complete', $order->Order_ID) }}" method="POST" style="display:inline;">
+            @csrf
+            <button class="btn-orange" onclick="return confirm('Mark this order as Completed?')">✅ </button>
+        </form>
+    @endif
                         <form action="
                         {{ route('orders.destroy', $order->Order_ID) }}
                          " method="POST" style="display:inline;">
