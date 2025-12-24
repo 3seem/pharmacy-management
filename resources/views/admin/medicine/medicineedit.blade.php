@@ -1,15 +1,6 @@
 @extends('layouts.testlayout')
 
-@php
-                        $categories = [
-                            'admin.dashboard' => ['text' => 'Admin Dashboard', 'route' => 'admin.dashboard'],
-                            'usermanagement.index' => ['text' => 'User Management', 'route' => 'usermanagement.index'],
-                            'medicine.index' => ['text' => 'Medicine', 'route' => 'medicine.index'],
-                            'suppliers.index' => ['text' => 'Suppliers', 'route' => 'suppliers.index'],
-                            'sales.index' => ['text' => 'Sales', 'route' => 'sales.index'],
-                            'orders.index' => ['text' => 'Orders', 'route' => 'orders.index'],
-                        ];
-                    @endphp
+
 
 <style>
 .form-box{
