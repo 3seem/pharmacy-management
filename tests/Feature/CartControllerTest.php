@@ -43,6 +43,7 @@ class CartControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewHas('cart');
     }
+    
 
     public function test_user_can_add_item_to_cart()
     {

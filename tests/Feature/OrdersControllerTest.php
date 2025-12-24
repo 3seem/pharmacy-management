@@ -32,16 +32,14 @@ class OrdersControllerTest extends TestCase
             ]);
             $user = DB::table('users')->where('id', $userId)->first();
         }
-        $this->user = User::find($user->id); // Eloquent User عشان actingAs يشتغل
+        $this->user = User::find($user->id); 
 
-        // جلب أو إنشاء customer مرتبط بالمستخدم
         DB::table('customers')->updateOrInsert(
             ['id' => $this->user->id],
             ['total_purchases' => 0]
         );
         $this->customer = DB::table('customers')->where('id', $this->user->id)->first();
 
-        // جلب أو إنشاء medicine
         $medicine = DB::table('medicines')->where('name', 'Test Medicine')->first();
         if (!$medicine) {
             $medicineId = DB::table('medicines')->insertGetId([
@@ -58,14 +56,12 @@ class OrdersControllerTest extends TestCase
 
     public function test_user_can_checkout_cart_and_create_order()
     {
-        // إضافة منتج صالح للكارت
         $cartId = DB::table('carts')->insertGetId([
             'user_id' => $this->user->id,
             'medicine_id' => $this->medicine->medicine_id,
             'quantity' => 2,
         ]);
 
-        // POST للـ checkout مع actingAs للمستخدم
         $response = $this->actingAs($this->user)
                          ->post(route('checkout.cart'));
 
