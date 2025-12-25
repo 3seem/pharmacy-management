@@ -121,7 +121,7 @@ class MedicineStoreControllerTest extends TestCase
                 30,
                 null,
                 5,
-                'Powder',
+                '   ',
                 null,
                 null,
                 null,
