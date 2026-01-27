@@ -10,10 +10,10 @@
 
 <body>
 
-
+{{-- {{dd($medicine)}}   --}}
     <main class="product-page">
         <div class="product-image">
-            <img src="../assets/images/thermometer.png" alt="product image">
+            <img src="{{ asset($medicine->image_url)}}" alt="product image">
         </div>
         <div class="product-details">
             <h1>{{$medicine->Name}}</h1>

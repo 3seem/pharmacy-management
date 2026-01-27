@@ -28,8 +28,9 @@
                         @foreach ($cart as $item)
                         <div class="cart-item-card">
                             <div class="item-main">
+                                {{-- {{dd($item)}} --}}
                                 <div class="item-image">
-                                    <img src="../assets/images/foley.png" alt="product">
+                                    <img style="width: 40px; height:40px;" src="{{asset($item->medicine->image_url)}}" alt="product">
                                 </div>
 
                                 <div class="item-details">

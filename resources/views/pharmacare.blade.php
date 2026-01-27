@@ -52,7 +52,19 @@
         @foreach ($medicine as $item)
             <div class="{{str_replace(' ', '', $item->Category)}}">
                     <article class="product-card" >
-                        <img src="../assets/images/foley.png" alt="Foley Catheter">
+                        {{-- <img src="{{ asset($item->image_url) }}" alt="Foley Catheter"> --}}
+                        <img 
+    src="{{ asset($item->image_url) }}" 
+    alt="Foley Catheter" 
+    style="
+        display: block;
+        margin: auto;
+        max-width: 100%;
+        max-height: 180px;
+        object-fit: contain;
+    "
+>
+
                         <h3 class="details">{{$item->Name}}</h3>
                         <p class="price">${{$item->Price}}  </p>
                         <a href="{{route('product_details',$item->medicine_id)}}" class="btn">  View  </a>

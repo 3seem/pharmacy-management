@@ -21,7 +21,7 @@
                         <article class="product-card">
                             {{-- <img src="../assets/images/foley.png" alt="{{ $item->Name }}"> --}}
                             <div style="display:flex; justify-content:center; align-items:center;">
-                                <img src="../assets/images/foley.png" alt="{{ $item->Name }}">
+                                <img src="{{ asset($item->image_url) }}" alt="{{ $item->Name }}">
                             </div>
 
                             <h3>{{ $item->Name }}</h3>
