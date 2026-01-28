@@ -12,4 +12,10 @@ class Customer extends Model
     {
         return $this->belongsTo(User::class, 'id', 'id');
     }
+   
+    public function conversations()
+        {
+            return $this->hasMany(Conversation::class);
+        }
+
 }

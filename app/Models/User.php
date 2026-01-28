@@ -57,4 +57,9 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
 
+    public function conversations()
+        {
+            return $this->hasMany(Conversation::class, 'admin_id');
+        }
+
 }

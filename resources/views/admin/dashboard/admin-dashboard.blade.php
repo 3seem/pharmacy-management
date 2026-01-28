@@ -1,6 +1,11 @@
 @extends('layouts.testlayout')
 
+
+
 @section('content')
+
+
+
 <div data-w-id="3339bdcb-1416-def4-bc41-707f931ae6d0" class="scroll_part">
     <section class="hero">
         <div class="hero_part">
@@ -13,6 +18,12 @@
                     </div>
                 </div>
             </div>
+
+
+<a href="{{ route('admin.chat.list') }}" 
+   style="display:inline-block; padding:10px 20px; background:#2ed573; color:#fff; border-radius:5px; text-decoration:none;">
+   chats
+</a>
 
             {{-- Main content slot --}}
             <div class="wrapper" style="padding-top: 50px;">

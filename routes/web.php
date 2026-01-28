@@ -18,6 +18,9 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\IsAdmin;
 
+use App\Http\Controllers\ChatController;
+
+
 
 Route::post('/checkout', [orders::class, 'checkoutFromCart'])
     ->middleware('auth')
@@ -86,12 +89,57 @@ Route::get('/product_details/{id}', function ($medicine_id = id) {
 
 
 
+//chat
+// Route::middleware(['auth'])->group(function () {
+
+//     Route::get('/chat/{conversation}', [ChatController::class, 'show'])
+//         ->name('chat.show');
+
+//     Route::post('/chat/send', [ChatController::class, 'send'])
+//         ->name('chat.send');
+
+//     Route::get('/chat/{conversation}/messages', [ChatController::class, 'fetchMessages'])
+//         ->name('chat.messages');
+
+// });
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/my-chats', [ChatController::class, 'myChats'])->name('chat.list');
+
+    Route::get('/chat/{conversation}', [ChatController::class, 'show'])->name('chat.show');
+    
+    Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
+    Route::get('/chat/{conversation}/messages', [ChatController::class, 'fetchMessages'])->name('chat.messages');
+    Route::post('/chat/start', [ChatController::class, 'startChat'])->name('chat.start');
+
+});
 
 
 
 
 
 // Admin
+
+
+
+
+//chat
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/my-chats', [ChatController::class, 'myChats'])->name('chat.list');
+
+    Route::get('/admin/chats', [ChatController::class, 'adminChats'])->name('admin.chat.list');
+
+    Route::get('/chat/{conversation}', [ChatController::class, 'show'])->name('chat.show');
+    
+    Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
+    Route::get('/chat/{conversation}/messages', [ChatController::class, 'fetchMessages'])->name('chat.messages');
+
+});
+
+
+
 Route::middleware(['auth', 'verified', IsAdmin::class])->group(
     function () {
         Route::get(

@@ -46,6 +46,10 @@
                     Cart
                 </a>
 
+                <a href="{{ route('chat.list') }}" 
+                style="display:inline-block; padding:10px 10px;background:#1975ef; color:#fff; border-radius:10px; text-decoration:none;">
+                chats
+                </a>
                 <!-- Enhanced User Dropdown -->
                 <div x-data="{ open: false }" class="relative">
                     <button 
@@ -117,7 +121,6 @@
             </nav>
         </div>
     </header>
-
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
     @yield('content')
