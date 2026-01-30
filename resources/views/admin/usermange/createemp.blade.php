@@ -28,6 +28,12 @@
 <div class="form-box">
     <h2>Add New Employee</h2>
 
+    @if (session('error'))
+    <div style="background:#d32f2f;color:white;padding:10px;border-radius:5px;margin-bottom:15px;">
+        {{ session('error') }}
+    </div>
+    @endif
+
     @if ($errors->any())
     <div>
         <ul>
@@ -42,49 +48,50 @@
         @csrf
 
         <div class="form-group">
-            <label>Employee Name</label>
-            <input type="text" name="name" required>
+            <label>Employee Name <span style="color:red">*</span></label>
+            <input type="text" name="name" value="{{ old('name') }}" required>
         </div>
 
         <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" required>
+            <label>Email <span style="color:red">*</span></label>
+            <input type="email" name="email" value="{{ old('email') }}" required>
         </div>
+
         <div class="form-group">
-    <label>Password</label>
-    <input type="password" name="password" required>
-</div>
+            <label>Password <span style="color:red">*</span></label>
+            <input type="password" name="password" required minlength="6">
+        </div>
 
         <div class="form-group">
             <label>Phone</label>
-            <input type="text" name="Phone">
+            <input type="text" name="Phone" value="{{ old('Phone') }}">
         </div>
 
         <div class="form-group">
             <label>Address</label>
-            <textarea name="Address"></textarea>
+            <textarea name="Address" rows="3">{{ old('Address') }}</textarea>
         </div>
 
         <div class="form-group">
-            <label>Salary</label>
-            <input type="number" step="0.01" name="Salary" required>
+            <label>Salary <span style="color:red">*</span></label>
+            <input type="number" step="0.01" min="0.01" name="Salary" value="{{ old('Salary') }}" required>
         </div>
 
         <div class="form-group">
-            <label>Hire Date</label>
-            <input type="date" name="Hire_Date" required>
+            <label>Hire Date <span style="color:red">*</span></label>
+            <input type="date" name="Hire_Date" value="{{ old('Hire_Date') }}" required>
         </div>
 
         <div class="form-group">
-            <label>Employment Status</label>
-            <select name="employment_status">
-                <option value="Active">Active</option>
-                <option value="On Leave">On Leave</option>
-                <option value="Terminated">Terminated</option>
+            <label>Employment Status <span style="color:red">*</span></label>
+            <select name="employment_status" required>
+                <option value="Active" {{ old('employment_status') == 'Active' ? 'selected' : '' }}>Active</option>
+                <option value="On Leave" {{ old('employment_status') == 'On Leave' ? 'selected' : '' }}>On Leave</option>
+                <option value="Terminated" {{ old('employment_status') == 'Terminated' ? 'selected' : '' }}>Terminated</option>
             </select>
         </div>
 
-        <button class="btn-save">➕ Add Employee</button>
+        <button type="submit" class="btn-save">➕ Add Employee</button>
         <a href="{{ route('admin.usermanagement') }}" class="btn-cancel">Cancel</a>
 
     </form>

@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Product;
 
 class Order extends Model
 {
+    protected $table = 'orders';
     protected $primaryKey = 'Order_ID';
+
     protected $fillable = [
         'Order_Date',
         'Total_amount',
@@ -21,25 +22,29 @@ class Order extends Model
         'delivery_type',
         'notes',
     ];
-    // relation with customer
+
+    protected $casts = [
+        'Order_Date' => 'datetime',
+        'Total_amount' => 'decimal:2',
+        'discount_amount' => 'decimal:2',
+        'tax_amount' => 'decimal:2',
+    ];
+
+    // Relation with customer
     public function customer()
     {
         return $this->belongsTo(User::class, 'Customer_ID', 'id');
     }
-    // relation with employee
+
+    // Relation with employee
     public function employee()
     {
         return $this->belongsTo(User::class, 'Employee_ID', 'id');
     }
+
+    // Relation with order items
     public function items()
     {
         return $this->hasMany(order_item::class, 'Order_ID', 'Order_ID');
-        // 'Order_ID' => column in order_items table
-        // 'id'       => column in orders table
     }
-
-    // public function product()
-    // {
-    //     return $this->belongsTo(Product::class);
-    // }
 }

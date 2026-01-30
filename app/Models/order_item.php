@@ -6,17 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class order_item extends Model
 {
-    //
-    
-    // no single primary key
+    protected $table = 'order_items';
+
+    // Composite primary key - disable auto-incrementing
+    public $incrementing = false;
+
     protected $fillable = [
         'Order_ID',
         'medicine_id',
         'Quantity',
         'unit_price',
         'subtotal',
-        'batch_number ',
+        'batch_number',
     ];
+
+    protected $casts = [
+        'Quantity' => 'integer',
+        'unit_price' => 'decimal:2',
+        'subtotal' => 'decimal:2',
+    ];
+
+    /**
+     * Find a record by composite key
+     */
     public static function findComposite($orderId, $medicineId)
     {
         return self::where('Order_ID', $orderId)
@@ -29,7 +41,6 @@ class order_item extends Model
      */
     public static function createComposite($data)
     {
-        // $data should include 'Order_ID' and 'medicine_id'
         return self::create($data);
     }
 
@@ -46,14 +57,26 @@ class order_item extends Model
     /**
      * Delete a record by composite key
      */
-    public function deleteComposite()
+    public static function deleteComposite($orderId, $medicineId)
     {
-        return self::where('Order_ID', $this->Order_ID)
-            ->where('medicine_id', $this->medicine_id)
+        return self::where('Order_ID', $orderId)
+            ->where('medicine_id', $medicineId)
             ->delete();
     }
+
+    /**
+     * Relation with medicine
+     */
     public function medicine()
     {
-        return $this->belongsTo(medicine::class, 'medicine_id', 'medicine_id');
+        return $this->belongsTo(Medicine::class, 'medicine_id', 'medicine_id');
+    }
+
+    /**
+     * Relation with order
+     */
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'Order_ID', 'Order_ID');
     }
 }

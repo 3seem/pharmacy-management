@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
@@ -31,20 +32,32 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        try {
+            // Call stored procedure (CUSTOMER ONLY)
+            DB::statement("CALL sp_AddCustomer(?, ?, ?, ?)", [
+                $request->name,
+                $request->email,
+                Hash::make($request->password),
+                null, // DOB optional
+            ]);
 
-        event(new Registered($user));
+            // Fetch created user
+            $user = User::where('email', $request->email)->firstOrFail();
 
-        Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+            event(new Registered($user));
+
+            Auth::login($user);
+
+            return redirect()->route('dashboard');
+        } catch (\Exception $e) {
+            return back()
+                ->withInput()
+                ->withErrors(['register' => 'Registration failed: ' . $e->getMessage()]);
+        }
     }
 }
