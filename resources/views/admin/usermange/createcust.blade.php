@@ -28,6 +28,12 @@
 <div class="form-box">
     <h2>Add New Customer</h2>
 
+    @if (session('error'))
+    <div style="background:#d32f2f;color:white;padding:10px;border-radius:5px;margin-bottom:15px;">
+        {{ session('error') }}
+    </div>
+    @endif
+
     @if ($errors->any())
     <div>
         <ul>
@@ -42,43 +48,36 @@
         @csrf
 
         <div class="form-group">
-            <label>Customer Name</label>
-            <input type="text" name="name" required>
+            <label>Customer Name <span style="color:red">*</span></label>
+            <input type="text" name="name" value="{{ old('name') }}" required>
         </div>
 
         <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" required>
+            <label>Email <span style="color:red">*</span></label>
+            <input type="email" name="email" value="{{ old('email') }}" required>
         </div>
+
         <div class="form-group">
-    <label>Password</label>
-    <input type="password" name="password" required>
-</div>
+            <label>Password <span style="color:red">*</span></label>
+            <input type="password" name="password" required minlength="6">
+        </div>
 
         <div class="form-group">
             <label>Phone</label>
-            <input type="text" name="Phone">
+            <input type="text" name="Phone" value="{{ old('Phone') }}">
         </div>
 
         <div class="form-group">
             <label>Address</label>
-            <textarea name="Address"></textarea>
+            <textarea name="Address" rows="3">{{ old('Address') }}</textarea>
         </div>
 
         <div class="form-group">
             <label>Date of Birth</label>
-            <input type="date" name="DOB">
+            <input type="date" name="DOB" value="{{ old('DOB') }}">
         </div>
 
-        <div class="form-group">
-            <label>Status</label>
-            <select name="is_active">
-                <option value="1" selected>Active</option>
-                <option value="0">Inactive</option>
-            </select>
-        </div>
-
-        <button class="btn-save">➕ Add Customer</button>
+        <button type="submit" class="btn-save">➕ Add Customer</button>
         <a href="{{ route('admin.usermanagement') }}" class="btn-cancel">Cancel</a>
 
     </form>

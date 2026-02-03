@@ -23,10 +23,10 @@ use App\Http\Controllers\ChatController;
 
 
 Route::post('/checkout', [orders::class, 'checkoutFromCart'])
-    ->middleware('auth')
+    ->middleware(['auth', 'verified'])
     ->name('checkout.cart');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/cart', [Cart::class, 'index'])
         ->name('cart.index');
@@ -49,7 +49,7 @@ Route::get('/', function () {
         "categories" => $categories
     ]);
 });
-Route::middleware('auth')->group(
+Route::middleware(['auth', 'verified'])->group(
     function () {
         Route::get('/pharmacare', function () {
             $medicine = DB::table('medicines')->get();
@@ -59,7 +59,7 @@ Route::middleware('auth')->group(
                 "medicine" => $medicine,
                 "categories" => $categories
             ]);
-        })->name('home');
+        })->name('dashboard');
 
 
 
@@ -103,7 +103,7 @@ Route::get('/product_details/{id}', function ($medicine_id = id) {
 
 // });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/my-chats', [ChatController::class, 'myChats'])->name('chat.list');
 
@@ -125,7 +125,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 //chat
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/my-chats', [ChatController::class, 'myChats'])->name('chat.list');
 
@@ -303,9 +303,9 @@ Route::middleware(['auth', 'verified', IsAdmin::class])->group(
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

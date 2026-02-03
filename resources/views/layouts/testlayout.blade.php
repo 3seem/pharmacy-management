@@ -46,11 +46,7 @@
     <div class="header">
         <div class="wrapper">
             <div class="flexbox middle">
-                {{-- Logo --}}
-                <a href="{{ route('admin.dashboard') }}" class="logotype w-inline-block">
-                    <img src="https://cdn.prod.website-files.com/67ed3d92b4bc8a71132f2b27/67ed414f42ae0d552b5eff31_logotype-header.svg"
-                        loading="lazy" alt="Pharmacy Logo" class="image" />
-                </a>
+                
 
                 {{-- Navigation Menu --}}
                 <div class="menu">
@@ -62,8 +58,9 @@
                             'admin.suppliers' => ['text' => 'Suppliers', 'route' => 'admin.suppliers'],
                             'admin.orders' => ['text' => 'Orders', 'route' => 'admin.orders'],
                             'admin.batches' => ['text' => 'Batches', 'route' => 'admin.batches'],
-                            'adminlogs.index'=> ['text'=>'Admin Logs','route'=>'admin.audit_logs'],
-                            'pricelogs.index'=> ['text'=>'Price Change Logs','route'=>'admin.price_logs'],
+                            'adminlogs.index'=> ['text'=>'Admin Logs','route'=>'admin.audit_logs'],                            'adminlogs.index'=> ['text'=>'Admin Logs','route'=>'admin.audit_logs'],
+                            'chat'=> ['text'=>'Chat','route'=>'admin.chat.list'],
+
                         ];
                     @endphp
 
