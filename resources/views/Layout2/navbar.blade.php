@@ -124,5 +124,164 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
     @yield('content')
+<!-- ================= AI PHARMACIST WIDGET ================= -->
+<div id="ai-chat-wrapper">
+    <div id="ai-tooltip">AI Assistant</div>
+    <div id="ai-chat-button">💊</div>
+</div>
+
+<div id="ai-chat-box">
+    <div id="ai-header">AI Pharmacist</div>
+    <div id="ai-messages"></div>
+
+    <div id="ai-input-area">
+        <input type="text" id="ai-input" placeholder="Ask about any medicine..." />
+        <button onclick="sendAI()">➤</button>
+    </div>
+</div>
+
+<style>
+#ai-chat-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+/* Tooltip */
+#ai-tooltip {
+    position: absolute;
+    right: 70px;
+    bottom: 15px;
+    background: #007bff;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+/* Show tooltip on hover */
+#ai-chat-wrapper:hover #ai-tooltip {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+#ai-chat-button {
+    background: #007bff;
+    color: white;
+    font-size: 22px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#ai-chat-box {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 320px;
+    height: 420px;
+    background: white;
+    border-radius: 12px;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+#ai-header {
+    background: #007bff;
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+}
+
+#ai-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+#ai-input-area {
+    display: flex;
+    border-top: 1px solid #eee;
+}
+
+#ai-input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    outline: none;
+}
+
+#ai-input-area button {
+    background: #007bff;
+    color: white;
+    border: none;
+    width: 50px;
+    cursor: pointer;
+}
+</style>
+
+<script>
+const btn = document.getElementById("ai-chat-button");
+const box = document.getElementById("ai-chat-box");
+const messages = document.getElementById("ai-messages");
+
+btn.onclick = () => {
+    box.style.display = box.style.display === "flex" ? "none" : "flex";
+};
+
+async function sendAI() {
+    const input = document.getElementById("ai-input");
+    const text = input.value.trim();
+    if (!text) return;
+
+    addMessage("You", text);
+    input.value = "";
+
+    addMessage("AI", "Typing...");
+
+    const res = await fetch("http://127.0.0.1:8001/ask", {  // server port
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ question: text })
+    });
+
+    const data = await res.json();
+
+    removeLastAIMessage();
+    addMessage("AI", data.answer);
+}
+
+function addMessage(sender, text) {
+    const div = document.createElement("div");
+    div.innerHTML = `<b>${sender}:</b> ${text}`;
+    div.style.marginBottom = "8px";
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+}
+
+function removeLastAIMessage() {
+    const msgs = messages.querySelectorAll("div");
+    if (msgs.length) msgs[msgs.length - 1].remove();
+}
+</script>
+<!-- ================= END WIDGET ================= -->
+
 </body>
 </html>

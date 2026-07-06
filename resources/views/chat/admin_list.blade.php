@@ -1,16 +1,22 @@
-@extends('Layout2.navbar')
+{{-- @extends('Layout2.navbar')
 @section('content')
 
 @section('title')
 <title>Admin Chats</title>
-@endsection
+@endsection --}}
 
-@section('stylesheet')
+@extends('layouts.testlayout')
+
+
+
+@section('content')
+
+
 <style>
-body { font-family: Arial; background:#f1f2f6; padding: 20px;}
+body { font-family: Arial; background:#01030a; padding: 20px;padding-top: 80px;}
 .chat-list { max-width: 600px; margin: auto;margin-top: 10px;  }
 .chat-item {
-    background: #fff; 
+    background: #efebeb; 
     padding: 15px; 
     margin-bottom: 10px; 
     border-radius: 10px; 
@@ -32,7 +38,7 @@ body { font-family: Arial; background:#f1f2f6; padding: 20px;}
     align-items: center;           
     width: 20px;                   
     height: 20px;                  
-    background: #1e90ff;           
+    background: #ee502c;           
     color: #fff;                   
     font-size: 12px;              
     font-weight: bold;
@@ -41,22 +47,23 @@ body { font-family: Arial; background:#f1f2f6; padding: 20px;}
 }
 
 </style>
-@endsection
 
 <div class="chat-list">
     @foreach($conversations as $conversation)
         <div class="chat-item">
             <div>
+                
                 <a href="{{ route('chat.show', $conversation->id) }}">
-                    {{ $conversation->customer->name }}
+                    {{-- {{ $conversation->customer->name }} --}}
+                    {{ $conversation->customer->user->name ?? 'Unknown User' }}
                 </a>
                 <div class="last-message">
-                    {{ $conversation->latestMessage->message ?? 'no massages found' }}
+                    {{ $conversation->latestMessage->message ?? 'no messages found' }}
                 </div>
             </div>
 
             <div>
-                <a href="{{ route('chat.show', $conversation->id) }}" class="chat-link">open chat</a>
+                <a href="{{ route('chat.show_admin', $conversation->id) }}" class="chat-link">open chat</a>
 
             @if($conversation->unread_count > 0)
                 <span class="unread-badge">

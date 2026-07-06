@@ -109,6 +109,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/chat/{conversation}', [ChatController::class, 'show'])->name('chat.show');
     
+
+
     Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
     Route::get('/chat/{conversation}/messages', [ChatController::class, 'fetchMessages'])->name('chat.messages');
     Route::post('/chat/start', [ChatController::class, 'startChat'])->name('chat.start');
@@ -120,21 +122,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 // Admin
-
-
-
-
 //chat
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', IsAdmin::class])->group(function () {
 
-    Route::get('/my-chats', [ChatController::class, 'myChats'])->name('chat.list');
 
     Route::get('/admin/chats', [ChatController::class, 'adminChats'])->name('admin.chat.list');
 
-    Route::get('/chat/{conversation}', [ChatController::class, 'show'])->name('chat.show');
+    Route::get('/admin/chat/{conversation}', [ChatController::class, 'adminshow'])->name('chat.show_admin');
     
-    Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
-    Route::get('/chat/{conversation}/messages', [ChatController::class, 'fetchMessages'])->name('chat.messages');
+
+    
+    Route::post('/admin/chat/send', [ChatController::class, 'adminsend'])->name('chat.send');
+    Route::get('/admin/chat/{conversation}/messages', [ChatController::class, 'fetchadminMessages'])->name('chat.messages');
 
 });
 

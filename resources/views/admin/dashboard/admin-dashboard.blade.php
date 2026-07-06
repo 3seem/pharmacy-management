@@ -9,24 +9,17 @@
 <div data-w-id="3339bdcb-1416-def4-bc41-707f931ae6d0" class="scroll_part">
     <section class="hero">
         <div class="hero_part">
-            <div class="wrapper hero">
+            {{-- <div class="wrapper hero"> --}}
                 <div class="h_part">
-                    <div class="h1_box">
+                    <div class="h1_box" style="text-align: center; margin-bottom: 10px; padding-top: 20px;">
                         <h1 letters-fade-in-random="" text-split="" class="h1">
                             {{ $pageTitle ?? 'Pharmacy Dashboard' }}
                         </h1>
                     </div>
                 </div>
-            </div>
-
-
-<a href="{{ route('admin.chat.list') }}" 
-   style="display:inline-block; padding:10px 20px; background:#2ed573; color:#fff; border-radius:5px; text-decoration:none;">
-   chats
-</a>
-
+            {{-- </div> --}}
             {{-- Main content slot --}}
-            <div class="wrapper" style="padding-top: 50px;">
+            <div class="wrapper" style="padding-top: 30px;">
                 {{-- Dashboard Cards --}}
                 <div class="flexbox_bottom">
                     <div class="top_line"></div>

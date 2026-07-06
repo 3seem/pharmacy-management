@@ -1,19 +1,19 @@
-@extends('Layout2.navbar')
+@extends('layouts.testlayout')
+
+
+
 @section('content')
 
-@section('title')
-<title>Chat</title>
-@endsection
 
-@section('stylesheet')
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <style>
 body {
     font-family: Arial, sans-serif;
-    background: #f1f2f6;
+    background: #000;
     margin: 0;
-    padding: 0;
+    padding: 0 px;
 }
 
 .chat-wrapper {
@@ -21,37 +21,35 @@ body {
     justify-content: center; 
     align-items: center;     
     min-height: calc(100vh - 80px);
-    padding-top: 10px;
+    padding-top: 100px;
 }
 
 .chat-container {
     width: 450px;
     height: 600px;
-    background: #fff;
+    background: #1e1e1e;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 5px 20px rgba(0,0,0,.2);
+    box-shadow: 0 5px 20px rgba(0,0,0,.5);
 }
 
-/* هيدر الشات */
 .chat-header {
     padding: 15px;
-    background: #2f3542;
+    background: #111;
     color: #fff;
     text-align: center;
     font-weight: bold;
+    border-bottom: 1px solid #333;
 }
 
-/* صندوق الرسائل */
 .chat-messages {
     flex: 1;
     padding: 15px;
     overflow-y: auto;
-    background: #f5f6fa;
+    background: #141414;
 }
 
-/* رسائل */
 .message {
     max-width: 70%;
     padding: 10px;
@@ -60,46 +58,53 @@ body {
     font-size: 14px;
 }
 
-/* الرسائل المرسلة */
 .sent {
-    background: #70a1ff;
-    color: #fff;
+    background: #f8532e;
+    color: #fdfdfd;
     margin-left: auto;
     text-align: right;
 }
 
-/* الرسائل المستقبلة */
 .received {
-    background: #dfe4ea;
-    color: #000;
+    background: #2f3542;
+    color: #fff;
     margin-right: auto;
 }
 
-/* إدخال الرسائل */
 .chat-input {
     display: flex;
     padding: 10px;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #333;
+    background: #111;
 }
 
 .chat-input input {
     flex: 1;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #333;
     border-radius: 5px;
+    background: #1e1e1e;
+    color: #fff;
+}
+
+.chat-input input::placeholder {
+    color: #aaa;
 }
 
 .chat-input button {
     margin-left: 10px;
     padding: 10px 15px;
-    background: #2ed573;
+    background: #f8532e;
     border: none;
-    color: #fff;
+    color: #fdfbfb;
     border-radius: 5px;
     cursor: pointer;
 }
+
+.chat-input button:hover {
+    opacity: 0.8;
+}
 </style>
-@endsection
 
 <div class="chat-wrapper">
     <div class="chat-container">
@@ -113,9 +118,9 @@ body {
             <input type="text" id="messageInput" placeholder="Write your message...">
             <button onclick="sendMessage()">Send</button>
         </div>
-
     </div>
 </div>
+
 <script>
 const conversationId = {{ $conversation->id }};
 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -148,7 +153,6 @@ function loadMessages() {
         .then(data => {
             const box = document.getElementById('messages');
             box.innerHTML = '';
-
             data.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
 
             data.forEach(msg => {
@@ -170,7 +174,6 @@ function loadMessages() {
 }
 
 loadMessages();
-
 setInterval(loadMessages, 3000);
 </script>
 

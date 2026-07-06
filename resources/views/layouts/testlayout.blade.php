@@ -35,7 +35,7 @@
         .link_box.active .dot_link { background-color: red; }
         /* Mobile menu */
         @media (max-width: 768px) {
-            .menu { display: none; flex-direction: column; }
+            .menu { display: inline; flex-direction: column; }
             .menu.open { display: flex; background: #111; padding: 20px; }
         }
     </style>
@@ -49,7 +49,7 @@
                 
 
                 {{-- Navigation Menu --}}
-                <div class="menu">
+                <div class="menu" style="padding-left: 80px">
                     @php
                         $navLinks = [
                             'admin.dashboard' => ['text' => 'Admin Dashboard', 'route' => 'admin.dashboard'],
@@ -58,9 +58,9 @@
                             'admin.suppliers' => ['text' => 'Suppliers', 'route' => 'admin.suppliers'],
                             'admin.orders' => ['text' => 'Orders', 'route' => 'admin.orders'],
                             'admin.batches' => ['text' => 'Batches', 'route' => 'admin.batches'],
-                            'adminlogs.index'=> ['text'=>'Admin Logs','route'=>'admin.audit_logs'],                            'adminlogs.index'=> ['text'=>'Admin Logs','route'=>'admin.audit_logs'],
+                            'adminlogs.index'=> ['text'=>'Admin Logs','route'=>'admin.audit_logs'],
+                            'adminlogs.index'=> ['text'=>'Admin Logs','route'=>'admin.audit_logs'],
                             'chat'=> ['text'=>'Chat','route'=>'admin.chat.list'],
-
                         ];
                     @endphp
 

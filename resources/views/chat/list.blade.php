@@ -75,7 +75,6 @@ body { font-family: Arial; background:#f1f2f6; padding: 0px;}
                     {{ $conversation->latestMessage->message ?? 'no messages found' }}
                 </div>
             </div>
-
             <div>
                 <a href="{{ route('chat.show', $conversation->id) }}" class="chat-link">open chat</a>
 

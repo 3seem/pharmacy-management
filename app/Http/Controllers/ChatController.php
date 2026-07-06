@@ -78,8 +78,37 @@ class ChatController extends Controller
         ]);
     }
 
+    
+    public function adminsend(Request $request)
+    {
+        $request->validate([
+            'conversation_id' => 'required|exists:conversations,id',
+            'message' => 'required|string',
+        ]);
+
+        $user = Auth::user();
+
+        Message::create([
+            'conversation_id' => $request->conversation_id,
+            'sender_type' => $user->role === 'admin' ? 'admin' : 'customer',
+            'sender_id' => $user->id,
+            'message' => $request->message,
+        ]);
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
 
     public function fetchMessages($conversationId)
+    {
+        $messages = Message::where('conversation_id', $conversationId)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        return response()->json($messages);
+    }
+        public function fetchadminMessages($conversationId)
     {
         $messages = Message::where('conversation_id', $conversationId)
             ->orderBy('created_at', 'asc')
@@ -188,6 +217,36 @@ public function startChat(Request $request)
 
             return view('chat.admin_list', compact('conversations'));
         }
+
+        public function adminshow($conversationId)
+        {
+                $conversation = Conversation::with('messages')->findOrFail($conversationId);
+
+                $user = Auth::user();
+
+                if (
+                    ($user->role === 'admin' && $conversation->admin_id !== $user->id) ||
+                    ($user->role === 'customer' && $conversation->customer_id !== $user->id)
+                ) {
+                    abort(403);
+                }
+
+                if ($user->role === 'customer') {
+                    Message::where('conversation_id', $conversation->id)
+                        ->where('sender_type', 'admin')
+                        ->where('is_read', 0)
+                        ->update(['is_read' => 1]);
+                } elseif ($user->role === 'admin') {
+                    Message::where('conversation_id', $conversation->id)
+                        ->where('sender_type', 'customer')
+                        ->where('is_read', 0)
+                        ->update(['is_read' => 1]);
+                }
+
+                return view('chat.show_admin', compact('conversation'));
+        }
+
+
 
 
 
